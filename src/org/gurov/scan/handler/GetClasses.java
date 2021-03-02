@@ -14,7 +14,7 @@ import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
-import org.gurov.scan.ClassInfo;
+import org.gurov.scan.info.ClassInfo;
 import org.gurov.scan.intarfaces.IGetClasses;
 
 public class GetClasses implements IGetClasses {

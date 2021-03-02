@@ -8,6 +8,7 @@ import java.util.List;
 import org.gurov.scan.handler.GetClasses;
 import org.gurov.scan.handler.PrintClasses;
 import org.gurov.scan.handler.SaveClasses;
+import org.gurov.scan.info.ClassInfo;
 import org.gurov.scan.intarfaces.IGetClasses;
 import org.gurov.scan.intarfaces.IPrintClasses;
 import org.gurov.scan.intarfaces.ISaveClasses;

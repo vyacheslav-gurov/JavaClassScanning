@@ -4,9 +4,9 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.gurov.scan.ClassInfo;
-import org.gurov.scan.FieldInfo;
-import org.gurov.scan.MethodInfo;
+import org.gurov.scan.info.ClassInfo;
+import org.gurov.scan.info.FieldInfo;
+import org.gurov.scan.info.InfoImpl;
 import org.gurov.scan.intarfaces.IPrintClasses;
 
 public class PrintClasses implements IPrintClasses {
@@ -37,7 +37,7 @@ public class PrintClasses implements IPrintClasses {
 
 	private void printMethod(ClassInfo clazz) {
 		if (clazz.getMethod().size() > 0) {
-			for (MethodInfo method : clazz.getMethod()) {
+			for (InfoImpl method : clazz.getMethod()) {
 				if (method.getMethod().isSynthetic()) {
 					continue;
 				}
@@ -49,7 +49,7 @@ public class PrintClasses implements IPrintClasses {
 		}
 	}
 
-	private void printMethodAnnotations(MethodInfo method) {
+	private void printMethodAnnotations(InfoImpl method) {
 		if (method.getAnnotationsMethod().size() > 0) {
 			String result = method.getAnnotationsMethod().stream().map(m -> m.toString())
 					.collect(Collectors.joining(", ", "{", "}"));
