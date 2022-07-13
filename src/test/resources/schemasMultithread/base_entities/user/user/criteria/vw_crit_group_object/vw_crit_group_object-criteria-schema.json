@@ -1,0 +1,221 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_group_object",
+  "id" : "1456300177366",
+  "title" : "VW_CRIT_GROUP_OBJECT",
+  "description" : "Группы доступа и объекты",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods N", "BaseClass METHOD_RIGHTS%rowtype", "BaseClassIncompatible", "Complex", "NoContext", "NoID", "NoSort", "NoSystem", "NotObjects", "PlPlus", "USERCONTEXT 0", "" ],
+  "modified" : "2015-05-28T21:37:10",
+  "tag" : "ACCESS",
+  "cellStyle" : {
+    "$ref" : "src/cell-style.vb"
+  },
+  "properties" : {
+    "group_uadm" : {
+      "position" : 2,
+      "title" : "GROUP_UADM",
+      "description" : "Группа",
+      "width" : 16,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "GROUP_UADM"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "GROUP_UADM",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : {
+        "required" : true
+      }
+    },
+    "id_id" : {
+      "position" : 10,
+      "title" : "ID_ID",
+      "description" : "ID",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "ID_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "ID_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 4,
+      "orderBy" : { },
+      "refCriterion" : {
+        "$ref" : "../../../../../base_entities/user/user/criteria/vw_crit_oper_info/vw_crit_oper_info-criteria-schema.json"
+      },
+      "refCondition" : " [ID_ID] = {OPER_ID}",
+      "filter" : { }
+    },
+    "name" : {
+      "position" : 7,
+      "title" : "NAME",
+      "description" : "Наименование",
+      "width" : 33,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "par_ent" : {
+      "position" : 8,
+      "title" : "PAR_ENT",
+      "description" : "Группа включена в роли",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "PAR_ENT"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "PAR_ENT",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 4,
+      "orderBy" : { },
+      "refCriterion" : {
+        "$ref" : "../../../../../base_entities/user/user/criteria/vw_crit_obj_role_group/vw_crit_obj_role_group-criteria-schema.json"
+      },
+      "refCondition" : " [GROUP_UADM] = {EQ_ID} ",
+      "filter" : { }
+    },
+    "role" : {
+      "position" : 9,
+      "title" : "ROLE",
+      "description" : "Объект включен в роли",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "ROLE"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "ROLE",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 4,
+      "orderBy" : { },
+      "refCriterion" : {
+        "$ref" : "../../../../../base_entities/user/user/criteria/vw_crit_obj_role/vw_crit_obj_role-criteria-schema.json"
+      },
+      "refCondition" : " [ID_ID] = {M_ID} and  [TBP] = {M_CL_ID} ",
+      "filter" : { }
+    },
+    "short_name" : {
+      "position" : 6,
+      "title" : "SHORT_NAME",
+      "description" : "Код",
+      "width" : 16,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "SHORT_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "SHORT_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "tbp" : {
+      "position" : 4,
+      "title" : "TBP",
+      "description" : "ТБП",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "TBP"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "TBP",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "tbp_name" : {
+      "position" : 5,
+      "title" : "TBP_NAME",
+      "description" : "Наименование ТБП",
+      "width" : 15,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "TBP_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "TBP_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "type_obj" : {
+      "position" : 1,
+      "title" : "TYPE_OBJ",
+      "description" : "Тип объекта",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "TYPE_OBJ"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "TYPE_OBJ",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "u_name" : {
+      "position" : 3,
+      "title" : "U_NAME",
+      "description" : "Наименование группы",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "U_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "U_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

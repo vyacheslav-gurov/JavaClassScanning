@@ -1,0 +1,48 @@
+/*********************************************************************
+Класс:        Пользователи
+Операция:     Изменить пользователя
+Короткое имя: EDIT#AUTO
+
+FTC, Рачинский В.Л., последнее изменение 17.06.98 16:00
+*********************************************************************/
+pragma macro(NEQ, 'nvl([1]!=[2], nvl([1],[2]) is not NULL)', substitute);
+pragma macro(SET_NEW_VAL, 'if &NEQ([1],[2]) then [1]:=[2];end if', substitute);
+V#USER ref [USER];
+
+Begin
+  If P#NAME Is Null Then
+     Pragma Error('Фамилия Имя Отчество не определено!');
+  End If;
+  If P#USERNAME Is Null And V#SECURITY Then
+     Pragma Error('Сетевое имя не определено!');
+  End If;
+  Begin
+    Locate V#USER In [USER] Where V#USER.[USERNAME]=P#USERNAME And V#USER%Id!=This%Id;
+      Pragma Error('Сетевое имя ' || P#USERNAME || ' уже есть');
+    Exception When NO_DATA_FOUND Then Null;
+  End;
+
+  if not V#SECURITY and P#USERNAME <> nvl([USERNAME], P#USERNAME) then
+  -- пользователя не было в системе - изменили сетевое имя
+  -- проверим - может новое есть в системе доступа
+  	if Secadmin.CheckUser(P#USERNAME) then
+  		pragma error ('Сетевое имя ' || P#USERNAME || ' уже используется в системе доступа');
+  	end if;
+  end if;
+
+  If P#SECURITY_ADD Then
+     Secadmin.CreateUser(P#USERNAME, P#NAME);
+  ElsIf P#SECURITY_DEL Then
+     Secadmin.DeleteUser(P#USERNAME);
+  ElsIf [NAME]!=P#NAME And V#SECURITY Then
+     Secadmin.EditUser(P#USERNAME,P#NAME);
+  End If;
+
+  P#USERNAME := UPPER(P#USERNAME); -- [DVP-5616] Замечание 65. Приводим сетевое имя к верхнему регистру
+
+    -- Установка значений реквизитов
+  &SET_NEW_VAL([NAME], P#NAME);     -- Фамилия Имя Отчество
+  &SET_NEW_VAL([USERNAME], P#USERNAME); -- Сетевое имя
+  &SET_NEW_VAL([DEPART], P#DEPART);
+  &SET_NEW_VAL([FILIAL], nvl(P#DEPART.[FILIAL], [SYSTEM].[VARIABLES].[OURBRANCH]));
+End;

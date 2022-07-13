@@ -1,0 +1,36 @@
+pragma pl_sql(true);
+pragma set_column(app_domain, name, 'Подразделение');
+pragma set_column(app_domain, width, 10);
+type main is
+select /*+ first_rows use_nl(c1)*/ u(
+	x.username:username,u.name:name,
+	cast_to([USERS_U_REF],x.username):sref,
+	decode(to_char(instr(nvl(x.lock_status,'X'),'LOCK')),'0',
+		decode(to_char(instr(nvl(x.lock_status,'X'),'EXPIRE')),'0','','Пароль истек'),
+	  'Блокирован'):status,
+	decode(
+	  (select /*+ rule*/ a(1) in all_users%rowtype where a.username=x.username)
+	  ,1,'Да','Нет'):ora_user,
+	nvl(method.extract_property(x.properties, 'PROFILE'), 'DEFAULT'):Prof,
+	decode(instr(nvl(x.properties,'|'),'|LOCK'),0,'Да','Нет'):Nav,
+	decode(instr(nvl(x.properties,'|'),'|ADMIN'),0,'Нет','Да'):Admin,
+	decode(instr(nvl(x.properties,'|'),'|UADMIN'),0,'Нет','Да'):UAdmin,
+	decode(instr(nvl(x.properties,'|'),'|PICKER'),0,'Нет','Да'):Picker,
+	decode(instr(nvl(x.properties,'|'),'|UPICKER'),0,'Нет','Да'):UPicker,
+	decode(instr(nvl(x.properties,'|'),'|REVISOR'),0,'Нет','Да'):Revisor,
+	decode(instr(nvl(x.properties,'|'),'|CONTEXT'),0,'Нет','Да'):Context,
+	decode(instr(nvl(x.properties,'|'),'|ALLOBJECTS'),0,'Нет','Да'):Objs,
+	decode(instr(nvl(x.properties,'|'),'|SENIOR'),0,'Нет','Да'):CPrint,
+	decode(instr(nvl(x.properties,'|'),'|OPEN_SESSION'),0,'Нет','Да'):OpenSes,
+	decode(instr(nvl(x.properties,'|'),'|INIT_SESSION'),0,'Нет','Да'):InitSes,
+	decode(instr(nvl(x.properties,'|'),'|SESSION'),0,'Нет','Да'):NoSes,
+	decode(x.os_domain||x.os_user,null,'Нет',x.os_domain||'\'||x.os_user) : os_user,
+--# if lib.attr_name('DEPART','USER')<>'0'	
+	u.depart.code : app_domain,
+--# endif
+	d.id : sec_domain,
+	d.name : domain_name,
+	x.userid : userid
+) in ::[USER], (Users%rowtype:x), (sec_domain_entries%rowtype:de), (security_domains%rowtype:d)
+where u.username=x.username and instr(nvl(x.lock_status,'X'),'DELETE')=0
+  and de.user_id(true)=x.username and d.id(true)=de.domain_id;

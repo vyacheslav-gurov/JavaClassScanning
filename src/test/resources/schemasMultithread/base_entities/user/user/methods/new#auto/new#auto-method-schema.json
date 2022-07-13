@@ -1,0 +1,352 @@
+{
+  "$schema" : "../../../../../platform_class_method.json",
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/methods/new#auto",
+  "id" : "311",
+  "title" : "new#auto",
+  "description" : "Добавить",
+  "body" : { },
+  "userDriven" : true,
+  "accessibility" : 0,
+  "result" : {
+    "$ref" : "../../../../../base_entities/user/user/user-class-schema.json"
+  },
+  "type" : "constructor",
+  "textType" : 3,
+  "defined" : "0",
+  "package" : "Z$USER_NEW#AUTO",
+  "audit" : {
+    "created" : {
+      "date" : "1998-01-01T00:00:00",
+      "user" : "Лагута О.Н."
+    },
+    "modified" : {
+      "date" : "2009-05-12T17:25:45",
+      "user" : "Merkushev.Aleksey"
+    }
+  },
+  "status" : "valid",
+  "report" : { },
+  "hints" : "205015328.1107005899",
+  "isKernel" : false,
+  "props" : [ "", "BUF ", "CMD N", "COMMIT N", "COMPILER 11111011101111FF003", "CREATE Y", "CRITICAL N", "DEFHOTKEY N", "EMPTY_ID N", "FOCUS_VALIDATE 2", "HOTKEY 00", "IPIPE ", "LOAD_VALIDATE 2", "MULTI N", "OPIPE ", "PARAMS N", "PRIORITY 100", "REFRESH Y", "RTLBASE 581601", "RUN_MON N", "SHARE N", "STREAM N", "" ],
+  "script" : "SOURCES",
+  "tag" : "CORE",
+  "parameters" : {
+    "P_ALLOW_FIO" : {
+      "position" : 5,
+      "title" : "P_ALLOW_FIO",
+      "description" : "Разрешать совпадение ФИО",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "d",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P_DEPART" : {
+      "position" : 4,
+      "title" : "P_DEPART",
+      "description" : "Подразделение",
+      "type" : {
+        "$ref" : "../../../../../type/reference/depart_ref/depart_ref-class-schema.json"
+      },
+      "direction" : "d",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P_NAME" : {
+      "position" : 1,
+      "title" : "P_NAME",
+      "description" : "Фамилия Имя Отчество",
+      "type" : {
+        "$ref" : "../../../../../type/string/name/name-class-schema.json"
+      },
+      "default" : "%THIS%.NAME",
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P_SECURITY" : {
+      "position" : 3,
+      "title" : "P_SECURITY",
+      "description" : "Добавить в систему доступа",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "d",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P_USERNAME" : {
+      "position" : 2,
+      "title" : "P_USERNAME",
+      "description" : "Сетевое имя",
+      "type" : {
+        "$ref" : "../../../../../type/string/string_30/string_30-class-schema.json"
+      },
+      "default" : "%THIS%.USERNAME",
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    }
+  },
+  "variables" : {
+    "V_ERRM" : {
+      "position" : 1,
+      "title" : "V_ERRM",
+      "description" : "Сообщение",
+      "type" : {
+        "$ref" : "../../../../../type/string/string_1000/string_1000-class-schema.json"
+      },
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    }
+  },
+  "sources" : {
+    "vbscript" : {
+      "$ref" : "src/vbscript.vb"
+    },
+    "validate" : {
+      "$ref" : "src/validate.plp"
+    },
+    "execute" : {
+      "$ref" : "src/execute.plp"
+    },
+    "private" : {
+      "$ref" : "src/private.plp"
+    }
+  },
+  "controls" : {
+    "0" : {
+      "id" : "4426071711",
+      "name" : "Form1",
+      "title" : "Добавить",
+      "width" : 8700,
+      "height" : 2415,
+      "position" : 0,
+      "props" : [ ],
+      "type" : "FORM"
+    },
+    "1" : {
+      "id" : "4426071712",
+      "name" : "Label1",
+      "title" : "Фамилия Имя Отчество",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_NAME",
+      "tips" : "Поясняющая надпись (Фамилия Имя Отчество)",
+      "top" : 120,
+      "left" : 120,
+      "width" : 2580,
+      "height" : 360,
+      "position" : 1,
+      "tab_index" : 2,
+      "props" : [ ],
+      "type" : "LABEL"
+    },
+    "10" : {
+      "id" : "4426071722",
+      "name" : "CANCEL",
+      "title" : "Отмена",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "CANCEL",
+      "tips" : "Отказ от выполнения",
+      "top" : 1740,
+      "left" : 6060,
+      "width" : 2160,
+      "height" : 360,
+      "position" : 10,
+      "tab_index" : 11,
+      "props" : [ ],
+      "type" : "BUTTON"
+    },
+    "11" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_1000/string_1000-class-schema.json"
+      },
+      "id" : "4426071723",
+      "name" : "message",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%VAR%.V_ERRM",
+      "tips" : "(Сообщение)",
+      "top" : 1890,
+      "left" : 90,
+      "width" : 1932,
+      "height" : 360,
+      "position" : 11,
+      "tab_index" : 12,
+      "props" : [ "#@#", "Vb 0", "" ],
+      "type" : "TEXT"
+    },
+    "2" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/name/name-class-schema.json"
+      },
+      "id" : "4426071713",
+      "name" : "Text1",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_NAME",
+      "tips" : "Фамилия Имя Отчество",
+      "top" : 120,
+      "left" : 2760,
+      "width" : 5700,
+      "height" : 360,
+      "position" : 2,
+      "tab_index" : 3,
+      "props" : [ "", "V", "" ],
+      "type" : "TEXT"
+    },
+    "3" : {
+      "id" : "4426071714",
+      "name" : "Label2",
+      "title" : "Сетевое имя",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_USERNAME",
+      "tips" : "Поясняющая надпись (Сетевое имя)",
+      "top" : 540,
+      "left" : 120,
+      "width" : 2580,
+      "height" : 360,
+      "position" : 3,
+      "tab_index" : 4,
+      "props" : [ ],
+      "type" : "LABEL"
+    },
+    "4" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_30/string_30-class-schema.json"
+      },
+      "id" : "4426071715",
+      "name" : "Text2",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_USERNAME",
+      "tips" : "Сетевое имя",
+      "top" : 540,
+      "left" : 2760,
+      "width" : 5700,
+      "height" : 360,
+      "position" : 4,
+      "tab_index" : 5,
+      "props" : [ "", "V", "" ],
+      "type" : "TEXT"
+    },
+    "5" : {
+      "class_id" : {
+        "$ref" : "../../../type/reference/depart_ref/depart_ref-class-schema.json"
+      },
+      "id" : "4426071716",
+      "name" : "Object1",
+      "title" : "Подразделение",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_DEPART",
+      "tips" : "Объект:Подразделение",
+      "top" : 1020,
+      "left" : 120,
+      "width" : 2580,
+      "height" : 360,
+      "position" : 5,
+      "tab_index" : 6,
+      "props" : [ "", "S", "" ],
+      "type" : "OBJECT"
+    },
+    "6" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_20/string_20-class-schema.json"
+      },
+      "id" : "4426071717",
+      "name" : "Text3",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "depend" : {
+        "$ref" : "#/controls/5"
+      },
+      "qualifier" : "%PARAM%.P_DEPART.CODE",
+      "tips" : "Код",
+      "top" : 1020,
+      "left" : 2760,
+      "width" : 840,
+      "height" : 360,
+      "position" : 6,
+      "tab_index" : 7,
+      "props" : [ ],
+      "type" : "TEXT"
+    },
+    "7" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/name/name-class-schema.json"
+      },
+      "id" : "4426071719",
+      "name" : "Text4",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "depend" : {
+        "$ref" : "#/controls/5"
+      },
+      "qualifier" : "%PARAM%.P_DEPART.NAME",
+      "tips" : "Наименование",
+      "top" : 1020,
+      "left" : 3660,
+      "width" : 4800,
+      "height" : 360,
+      "position" : 7,
+      "tab_index" : 8,
+      "props" : [ ],
+      "type" : "TEXT"
+    },
+    "8" : {
+      "class_id" : {
+        "$ref" : "../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "id" : "4426071720",
+      "name" : "Check1",
+      "title" : "Добавить в систему доступа",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P_SECURITY",
+      "tips" : "Логическое значение (Добавить в систему доступа)",
+      "top" : 1500,
+      "left" : 120,
+      "width" : 3420,
+      "height" : 360,
+      "position" : 8,
+      "tab_index" : 9,
+      "props" : [ "", "V", "#@#", "Vb 0", "" ],
+      "type" : "CHECK"
+    },
+    "9" : {
+      "id" : "4426071721",
+      "name" : "OK",
+      "title" : "OK",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "OK",
+      "tips" : "Выполнить метод",
+      "top" : 1740,
+      "left" : 3780,
+      "width" : 2160,
+      "height" : 360,
+      "position" : 9,
+      "tab_index" : 10,
+      "props" : [ "", "V", "" ],
+      "type" : "BUTTON"
+    }
+  }
+}

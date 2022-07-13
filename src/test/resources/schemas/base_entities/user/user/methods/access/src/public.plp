@@ -1,0 +1,3 @@
+procedure set_rights(p_username string, p_depart ref [DEPART]);
+
+procedure set_rights_f(p_username string, p_filial ref [BRANCH]);

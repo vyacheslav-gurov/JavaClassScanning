@@ -1,0 +1,97 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_group_parent",
+  "id" : "1456300177367",
+  "title" : "VW_CRIT_GROUP_PARENT",
+  "description" : "Группы доступа и наследники групп",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods N", "BaseClass SUBJ_EQUAL%rowtype", "BaseClassIncompatible", "NoContext", "NoID", "NoSystem", "NotObjects", "PlPlus", "USERCONTEXT 0", "" ],
+  "modified" : "2013-10-23T15:38:54",
+  "cellStyle" : {
+    "$ref" : "src/cell-style.vb"
+  },
+  "properties" : {
+    "group_audm" : {
+      "position" : 1,
+      "title" : "GROUP_AUDM",
+      "description" : "Группа доступа",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a1.SUBJ_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":GROUP_AUDM",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : {
+        "required" : true
+      }
+    },
+    "id" : {
+      "position" : 0,
+      "title" : "ID",
+      "description" : "ID",
+      "width" : 10,
+      "unvisible" : "invisible",
+      "dataSource" : {
+        "text" : "a1.SUBJ_ID"
+      },
+      "qual" : "ID",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "own_gr" : {
+      "position" : 3,
+      "title" : "OWN_GR",
+      "description" : "Через кого наследуется",
+      "width" : 35,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a1.OWNER_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":OWN_GR",
+      "fetchStyle" : true,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "parent_gr" : {
+      "position" : 2,
+      "title" : "PARENT_GR",
+      "description" : "Чьи права наследуются",
+      "width" : 40,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a1.EQUAL_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":PARENT_GR",
+      "fetchStyle" : true,
+      "accessCheck" : "no_check",
+      "refType" : 4,
+      "orderBy" : { },
+      "refCriterion" : {
+        "$ref" : "../../../../../base_entities/user/user/criteria/vw_crit_group_object/vw_crit_group_object-criteria-schema.json"
+      },
+      "refCondition" : " [PARENT_GR] = {GROUP_UADM} ",
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

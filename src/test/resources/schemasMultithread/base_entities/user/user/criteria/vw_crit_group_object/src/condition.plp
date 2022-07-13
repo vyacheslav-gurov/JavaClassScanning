@@ -1,0 +1,63 @@
+type main is
+select t(
+'ОПЕРАЦИЯ'		: type_obj
+,t.subj_id 		: group_uadm
+,u.name			: u_name
+,t.class_id 	: TBP
+,c.name			: TBP_NAME
+,a.short_name	: short_name
+,a.name			: name
+,'Родители группы'		: par_ent
+,'Роли объекта'			: role
+,a.id			: id_id
+)
+ in method_rights%rowtype
+ ,(methods%rowtype a)
+ ,(classes%rowtype c)
+ ,(users%rowtype u)
+ where a.id=t.obj_id 
+ and c.id=t.class_id
+ and u.username=t.subj_id
+ union all
+select w(
+'ПРЕДСТАВЛЕНИЕ' : type_obj
+,w.subj_id 		: group_uadm
+,u.name			: u_name
+,w.class_id		: TBP
+,c.name			: TBP_NAME
+,e.short_name	: short_name
+,e.name			: name
+,'Родители группы'		: par_ent
+,'Роли объекта'			: role
+,e.id			: id_id
+)
+in criteria_rights%rowtype
+,(criteria%rowtype e)
+,(classes%rowtype c)
+ ,(users%rowtype u)
+ where e.id=w.obj_id /*and w.subj_id='SBE_ZAJ_SOG'*/
+  and c.id=w.class_id
+  and u.username=w.subj_id
+  and w.implicit is null
+  union all
+select z(
+'ПЕРЕХОД' : type_obj
+,z.subj_id 		: group_uadm
+,u.name			: u_name
+,z.class_id		: TBP
+,c.name			: TBP_NAME
+,x.short_name	: short_name
+,x.name			: name
+,'Родители группы'		: par_ent
+,'Роли объекта'			: role
+,x.id			: id_id
+)
+in TRANSITION_RIGHTS%rowtype
+,(TRANSITIONS%rowtype x)
+,(classes%rowtype c)
+ ,(users%rowtype u)
+ where x.id=z.obj_id /*and z.subj_id='SBE_ZAJ_SOG'*/
+ and c.id=z.class_id
+ and u.username=z.subj_id
+ order by 2,4;
+

@@ -1,0 +1,245 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_oper_info",
+  "id" : "1565372178914",
+  "title" : "VW_CRIT_OPER_INFO",
+  "description" : "Информация по операциям",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods N", "BaseClass METHODS%rowtype", "BaseClassIncompatible", "Complex", "NoContext", "NoID", "NoSystem", "NotObjects", "PlPlus", "USERCONTEXT 0", "" ],
+  "modified" : "2021-12-14T13:35:59",
+  "tag" : "COPIED",
+  "cellStyle" : {
+    "$ref" : "src/cell-style.vb"
+  },
+  "properties" : {
+    "accessibility" : {
+      "position" : 5,
+      "title" : "ACCESSIBILITY",
+      "description" : "Абсолютно доступна",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "ACCESSIBILITY"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "ACCESSIBILITY",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "class_name" : {
+      "position" : 1,
+      "title" : "CLASS_NAME",
+      "description" : "Класс",
+      "width" : 15,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "CLASS_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "CLASS_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "hotkey" : {
+      "position" : 12,
+      "title" : "HOTKEY",
+      "description" : "Горячие клавиши",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "HOTKEY"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "HOTKEY",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "modified" : {
+      "position" : 8,
+      "title" : "MODIFIED",
+      "description" : "Дата изменения",
+      "width" : 14,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "MODIFIED"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : "MODIFIED",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "oper_id" : {
+      "position" : 9,
+      "title" : "OPER_ID",
+      "description" : "ID операции",
+      "width" : 13,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "OPER_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "OPER_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 4,
+      "orderBy" : { },
+      "refCriterion" : {
+        "$ref" : "../../../../../base_entities/user/user/criteria/vw_crit_obj_role/vw_crit_obj_role-criteria-schema.json"
+      },
+      "refCondition" : " [CLASS_NAME] = {M_CL_ID}  and  [OPER_ID] = {M_ID} ",
+      "filter" : { }
+    },
+    "oper_name" : {
+      "position" : 4,
+      "title" : "OPER_NAME",
+      "description" : "Наименование операции",
+      "width" : 21,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "OPER_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "OPER_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "short_class" : {
+      "position" : 2,
+      "title" : "SHORT_CLASS",
+      "description" : "Наименование класса",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "SHORT_CLASS"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "SHORT_CLASS",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "short_oper" : {
+      "position" : 3,
+      "title" : "SHORT_OPER",
+      "description" : "Операция (код)",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "SHORT_OPER"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "SHORT_OPER",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "st" : {
+      "position" : 11,
+      "title" : "ST",
+      "description" : "Переход",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "ST"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "ST",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "stat" : {
+      "position" : 10,
+      "title" : "STAT",
+      "description" : "Статус",
+      "width" : 10,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "STAT"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "STAT",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "user_driven" : {
+      "position" : 6,
+      "title" : "USER_DRIVEN",
+      "description" : "Возможность запуска",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "USER_DRIVEN"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "USER_DRIVEN",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "user_modified" : {
+      "position" : 7,
+      "title" : "USER_MODIFIED",
+      "description" : "Изменил",
+      "width" : 15,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "USER_MODIFIED"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "USER_MODIFIED",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema" : "../../../../../platform_class_trigger.json",
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/triggers/log_z#user",
+  "class-id" : "USER",
+  "title" : "LOG_Z#USER",
+  "type" : "AFTER EACH ROW",
+  "event" : "INSERT OR UPDATE OR DELETE",
+  "table-name" : "Z#USER",
+  "$ref" : "/src/body.sql",
+  "status" : "ENABLED"
+}

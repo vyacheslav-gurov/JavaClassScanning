@@ -1,0 +1,19 @@
+{
+  "$schema" : "../../../platform_class.json",
+  "$id" : "https://sber.ru/schemas/type/boolean/boolean/boolean",
+  "type" : [ "null", "boolean" ],
+  "title" : "Логика",
+  "entity" : "type",
+  "base" : "boolean",
+  "dataSize" : 3,
+  "hasInstances" : false,
+  "isKernel" : false,
+  "isAutonomous" : false,
+  "modified" : "1998-01-01T00:00:00",
+  "shortName" : "0000000000100000000000000",
+  "isCollection" : false,
+  "oracleInterface" : "boolean",
+  "tag" : "core",
+  "storageGroup" : "small",
+  "isHasType" : false
+}

@@ -1,0 +1,7 @@
+pragma pl_sql(true);
+type main is
+select u(
+	u.username:username,u.name:name,
+	cast_to([USERS_G_REF],u.username):sref,
+	u.userid : uid
+) in Users%rowtype where u.[type]='G' and instr(nvl(u.properties,'X'),'|KERNEL')=0;

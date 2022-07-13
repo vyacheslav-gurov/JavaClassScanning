@@ -1,0 +1,6 @@
+Begin
+  -- Удаление из системы доступа
+  If user = inst_info.owner and Secadmin.CheckUser([USERNAME]) Then
+     Secadmin.DeleteUser([USERNAME]);
+  End if;
+End;

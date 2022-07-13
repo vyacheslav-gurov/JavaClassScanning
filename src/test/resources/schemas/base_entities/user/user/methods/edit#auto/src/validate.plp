@@ -1,0 +1,34 @@
+Begin
+  If P_MESSAGE='DEFAULT' then
+     P_INFO:='P#USERNAME,P#SECURITY_ADD,P#SECURITY_DEL';
+     -- Установка значений параметров
+     P#NAME     := [NAME];     -- Фамилия Имя Отчество
+     P#USERNAME := [USERNAME]; -- Сетевое имя
+     V#SECURITY := Secadmin.CheckUser(P#USERNAME); -- Признак наличия в ситеме доступа
+     P#SECURITY_ADD:= False; -- Признак добавления в систему доступа
+     P#SECURITY_DEL:= False; -- Признак удаления из системы доступа
+		V_ERRM:= null;
+		P_ALLOW_FIO:= true;		-- [DVP-5617] Операционисту выдается сообщение из клиент-валидатора о существовании пользователя с таким же ФИО
+  ElsIf P_MESSAGE='VALIDATE' And P_INFO='P#USERNAME' Then
+  	if V#SECURITY then	-- [DVP-5616] В случае если пользователь заведен в системе доступа, логика операции не позволяла изменить сетевое имя
+--		P#USERNAME := UPPER(P#USERNAME); -- Почему нельзя менять сетевое имя? [DVP-5616] Система доступа
+		P#USERNAME := [USERNAME];
+  	else
+		P#USERNAME := UPPER(P#USERNAME); -- [DVP-5616] Замечание 65. Если пользователя нет в системе доступа, то все равно приводим сетевое имя к верхнему регистру
+  	end if;
+  ElsIf P_MESSAGE='VALIDATE' Then
+     P#SECURITY_ADD:=P#SECURITY_ADD And Not V#SECURITY; -- Признак добавления в систему доступа
+     P#SECURITY_DEL:=P#SECURITY_DEL And V#SECURITY;     -- Признак удаления из системы доступа
+	if P_INFO = 'OK' then
+--		pragma error('STOP');
+		declare
+			u ref [USER];     -- Ссылка на пользователя
+		begin
+			Locate u In [USER] Where UPPER(u.[NAME]) = UPPER(P#NAME) and u%id!=this%id;
+			V_ERRM:= '?Существует другой '||bool_char(u.[USERNAME] is null , 'сотрудник', 'пользователь')||' с Фамилией Именем Отчеством ' || NL$ ||UPPER(P#NAME) ||NL$|| 'Продолжить?да';
+		exception when NO_DATA_FOUND then
+			null;
+		end;
+	End if;
+  end if;
+End;

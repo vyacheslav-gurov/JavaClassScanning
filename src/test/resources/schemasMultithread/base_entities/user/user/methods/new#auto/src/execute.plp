@@ -1,0 +1,60 @@
+/*********************************************************************
+Класс:        Пользователи
+Операция:     Добавить пользователя
+Короткое имя: NEW#AUTO
+
+FTC, Рачинский В.Л., последнее изменение 17.06.98 16:00
+*********************************************************************/
+u ref [USER];     -- Ссылка на пользователя
+Begin
+  -- Контроль входных параметров
+  If P_NAME Is Null Then
+     Pragma Error('Фамилия Имя Отчество не определено!');
+  End If;
+
+  If P_USERNAME Is Null Then
+     Pragma Error('Сетевое имя не определено!');
+  End If;
+
+  if P_USERNAME not in (INST_INFO.OWNER,'IB_SYSTEM','TRC','RKC') and P_DEPART is null then
+  	Pragma Error('Подразделение не определено!');
+  end if;
+
+--	P_NAME := InitCap(P_NAME);	-- [DVP-5616] Замечание 64. Даем возможность заполнять пользователя как в верхнем, так и в нижнем регистре.
+	-- [DVP-5617] Замечание 67. Разрешаем заводить пользователя с существующим ФИО при запуске из Навигатора
+	-- Если операция вызывается из другой операции (например импорт), то логика работает также как раньше
+	-- В валидаторе всегда устанавливаем P_ALLOW_FIO:= true;
+	if not nvl(P_ALLOW_FIO, false) then
+		begin
+			Locate u In [USER] Where u.[NAME] = P_NAME;
+			Pragma Error('Уже есть '||bool_char(u.[USERNAME] is null, 'сотрудник', 'пользователь')||' с Фамилией Именем Отчеством ' || P_NAME);
+		Exception When NO_DATA_FOUND Then
+			Null;
+		End;
+	end if;
+
+	P_USERNAME:=upper(P_USERNAME);
+
+  Begin
+    Locate u In [USER] Where u.[USERNAME] = P_USERNAME;
+    Pragma Error('Сетевое имя ' || P_USERNAME || ' используется для '||u.[NAME]);
+  Exception When NO_DATA_FOUND Then Null;
+  End;
+  -- Проверка на то, что пользователь уже заведен в системе доступа
+  if Secadmin.CheckUser(P_USERNAME) then
+  	pragma error ('Сетевое имя ' || P_USERNAME || ' уже используется в системе доступа');
+  end if;
+
+  -- Установка значений реквизитов
+  [NAME]     := P_NAME;     -- Фамилия Имя Отчество"
+  [USERNAME] := P_USERNAME;		   -- Сетевое имя
+  [DEPART] := P_DEPART;
+  [FILIAL] := nvl(P_DEPART.[FILIAL], [SYSTEM].[VARIABLES].[OURBRANCH]);
+  pragma set_this;
+  -- Котроль и добавление в систему доступа
+  If P_SECURITY Then
+     Secadmin.CreateUser(P_USERNAME, P_NAME);
+  ElsIf user_exists Then
+     Secadmin.EditUser(P_USERNAME,P_NAME);
+  End if;
+End;

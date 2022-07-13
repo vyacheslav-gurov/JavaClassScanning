@@ -1,0 +1,252 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_user",
+  "id" : "4384",
+  "title" : "VW_CRIT_USER",
+  "description" : " Полный список",
+  "type" : "filter",
+  "rights" : "type",
+  "isNotObjects" : false,
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods Y", "HasClass", "NotObjects", "USERCONTEXT 0", "" ],
+  "modified" : "2021-08-10T13:44:33",
+  "properties" : {
+    "c_beg_date" : {
+      "position" : 4,
+      "title" : "C_BEG_DATE",
+      "description" : "Дата поступления",
+      "width" : 21,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "A1_1.C_BEG_DATE"
+      },
+      "align" : "right",
+      "base" : "date",
+      "qual" : "BEG_DATE",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 4,
+      "filter" : { }
+    },
+    "c_code" : {
+      "position" : 6,
+      "title" : "C_CODE",
+      "description" : "Код подразделения",
+      "width" : 11,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A2_1.C_CODE"
+      },
+      "align" : "top",
+      "base" : "string",
+      "reference" : "A1.DEPART",
+      "target" : {
+        "$ref" : "../../../../../type/dictionary/depart/depart-class-schema.json"
+      },
+      "qual" : "DEPART.CODE",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 0,
+      "orderBy" : { },
+      "srcPos" : 6,
+      "refQual" : "CODE",
+      "filter" : {
+        "required" : true
+      }
+    },
+    "c_depart" : {
+      "position" : 5,
+      "title" : "C_DEPART",
+      "description" : "Подразделение (код)",
+      "width" : 2,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "A1_1.C_DEPART"
+      },
+      "align" : "top",
+      "base" : "reference",
+      "target" : {
+        "$ref" : "../../../../../type/dictionary/depart/depart-class-schema.json"
+      },
+      "qual" : "DEPART",
+      "fetchStyle" : false,
+      "accessCheck" : "object",
+      "refType" : 0,
+      "orderBy" : { },
+      "srcPos" : 5,
+      "filter" : { }
+    },
+    "c_filial" : {
+      "position" : 9,
+      "title" : "C_FILIAL",
+      "description" : "Филиал",
+      "width" : 8,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "A1_1.C_FILIAL"
+      },
+      "align" : "top",
+      "base" : "reference",
+      "target" : {
+        "$ref" : "../../../../../type/dictionary/branch/branch-class-schema.json"
+      },
+      "qual" : "FILIAL",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 0,
+      "orderBy" : { },
+      "srcPos" : 9,
+      "filter" : { }
+    },
+    "c_fio" : {
+      "position" : 1,
+      "title" : "C_FIO",
+      "description" : "Фамилия Имя Отчество",
+      "width" : 21,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A1_1.C_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 1,
+      "filter" : {
+        "required" : true
+      }
+    },
+    "c_id" : {
+      "position" : 10,
+      "title" : "C_ID",
+      "description" : "id",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "A1_1.id"
+      },
+      "align" : "top",
+      "qual" : "ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 10,
+      "filter" : { }
+    },
+    "c_name" : {
+      "position" : 7,
+      "title" : "C_NAME",
+      "description" : "Подразделение",
+      "width" : 23,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A2_1.C_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "reference" : "A1.DEPART",
+      "target" : {
+        "$ref" : "../../../../../type/dictionary/depart/depart-class-schema.json"
+      },
+      "qual" : "DEPART.NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 0,
+      "orderBy" : { },
+      "srcPos" : 7,
+      "refQual" : "NAME",
+      "filter" : { }
+    },
+    "c_num_tab" : {
+      "position" : 2,
+      "title" : "C_NUM_TAB",
+      "description" : "Табельный номер",
+      "width" : 11,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A1_1.C_NUM_TAB"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "NUM_TAB",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 2,
+      "filter" : { }
+    },
+    "c_otvet" : {
+      "position" : 8,
+      "title" : "C_OTVET",
+      "description" : "Пачка",
+      "width" : 11,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A1_1.C_OTVET"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "OTVET",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 8,
+      "filter" : { }
+    },
+    "c_username" : {
+      "position" : 3,
+      "title" : "C_USERNAME",
+      "description" : "Сетевое имя",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "A1_1.C_USERNAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "USERNAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "srcPos" : 3,
+      "filter" : {
+        "required" : true
+      }
+    }
+  },
+  "methods" : [ ],
+  "tries" : {
+    "a1" : {
+      "short" : "USER",
+      "description" : "Пользователи",
+      "joinType" : "JOIN"
+    },
+    "a1.depart" : {
+      "short" : "DEPART",
+      "description" : "Подразделение",
+      "parentKey" : "A1",
+      "joinType" : "REFERENCE"
+    },
+    "a2" : {
+      "short" : "DEPART",
+      "description" : "Подразделения",
+      "parentKey" : "A1.DEPART",
+      "joinType" : "JOIN_OUTER"
+    }
+  },
+  "prints" : [ ]
+}

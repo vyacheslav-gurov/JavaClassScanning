@@ -1,0 +1,44 @@
+{
+  "$schema" : "../../../../../platform_class_method.json",
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/methods/lib",
+  "id" : "3314",
+  "title" : "lib",
+  "description" : "Библиотека пользователя",
+  "body" : { },
+  "userDriven" : false,
+  "accessibility" : 0,
+  "type" : "library",
+  "textType" : 0,
+  "defined" : "0",
+  "package" : "Z$USER_LIB",
+  "audit" : {
+    "created" : {
+      "date" : "1998-12-01T14:16:50",
+      "user" : "dm"
+    },
+    "modified" : {
+      "date" : "2021-12-16T11:59:15",
+      "user" : "19699202"
+    }
+  },
+  "status" : "valid",
+  "report" : { },
+  "hints" : "1029738905.1012550747",
+  "isKernel" : false,
+  "props" : [ "", "BUF ", "CMD N", "COMMIT N", "COMPILER 01111011111111FF003", "CREATE N", "CRITICAL N", "DEFHOTKEY N", "EMPTY_ID N", "FOCUS_VALIDATE 0", "HOTKEY 00", "IPIPE ", "LOAD_VALIDATE 0", "MULTI N", "OPIPE ", "PARAMS N", "PRIORITY 100", "REFRESH Y", "RUN_MON N", "SHARE N", "STREAM Y", "RTLBASE 2101", "" ],
+  "script" : "SOURCES",
+  "sources" : {
+    "vbscript" : {
+      "$ref" : "src/vbscript.vb"
+    },
+    "public" : {
+      "$ref" : "src/public.plp"
+    },
+    "execute" : {
+      "$ref" : "src/execute.plp"
+    },
+    "private" : {
+      "$ref" : "src/private.plp"
+    }
+  }
+}

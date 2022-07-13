@@ -1,0 +1,76 @@
+type main is
+	select  
+	distinct m(  
+	se.subj_id 	:se_id,
+	u.name		:u_name,
+	m.obj_id 	:m_id,
+	m.class_id  :m_cl_id
+	)
+	in
+	  method_rights%rowtype
+	 ,(subj_equal%rowtype se)
+	 ,(users%rowtype u)
+	 where
+	   se.equal_id = m.subj_id
+	   and se.subj_id = u.username
+	   and u.type = 'G'
+	   and (u.properties is null or u.properties not like '%|KERNEL|%')
+and 
+      exists 
+   (select sd(1) in sec_domain_entries%rowtype where sd.user_id=se.subj_id and sd.domain_id in 
+         (select s1(s1.id)  in security_domains%rowtype 
+                       connect by s1.parent_id=prior s1.id 
+                        start s1.id='USPD')
+   )
+   
+union all
+	select  
+	distinct m(  
+	se.subj_id 	:se_id,
+	u.name		:u_name,
+	m.obj_id 	:m_id,
+	m.class_id  :m_cl_id
+	)
+	in
+	  criteria_rights%rowtype
+	 ,(subj_equal%rowtype se)
+	 ,(users%rowtype u)
+	 where
+	   se.equal_id = m.subj_id
+	   and se.subj_id = u.username
+	   and u.type = 'G'
+	   and (u.properties is null or u.properties not like '%|KERNEL|%')
+and 
+      exists 
+   (select sd(1) in sec_domain_entries%rowtype where sd.user_id=se.subj_id and sd.domain_id in 
+         (select s1(s1.id)  in security_domains%rowtype 
+                       connect by s1.parent_id=prior s1.id 
+                        start s1.id='USPD')
+   )
+union all
+	select  
+	distinct m(  
+	se.subj_id 	:se_id,
+	u.name		:u_name,
+	m.obj_id 	:m_id,
+	m.class_id  :m_cl_id
+	)
+	in
+	  transition_rights%rowtype
+	 ,(subj_equal%rowtype se)
+	 ,(users%rowtype u)
+	 where
+	   se.equal_id = m.subj_id
+	   and se.subj_id = u.username
+	   and u.type = 'G'
+	   and (u.properties is null or u.properties not like '%|KERNEL|%')
+  and 
+      exists 
+   (select sd(1) in sec_domain_entries%rowtype where sd.user_id=se.subj_id and sd.domain_id in 
+         (select s1(s1.id)  in security_domains%rowtype 
+                       connect by s1.parent_id=prior s1.id 
+                        start s1.id='USPD')
+   )
+   
+
+   ;
