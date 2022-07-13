@@ -1,0 +1,25 @@
+type main is
+	select  
+	se(  
+	se.subj_id 	:se_id,
+	u.name		:u_name,
+	se.equal_id	:eq_id
+	)
+	in
+	 subj_equal%rowtype
+	 ,(users%rowtype u)
+	 where
+	   se.subj_id = u.username
+	   and u.type = 'G'
+	   and (u.properties is null or u.properties not like '%|KERNEL|%')
+
+  and 
+      exists 
+   (select sd(1) in sec_domain_entries%rowtype where sd.user_id=se.subj_id and sd.domain_id in 
+         (select s1(s1.id)  in security_domains%rowtype 
+                       connect by s1.parent_id=prior s1.id 
+                        start s1.id='USPD')
+   )
+   
+
+   ;

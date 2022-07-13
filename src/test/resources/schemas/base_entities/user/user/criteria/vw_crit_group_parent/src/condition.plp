@@ -1,0 +1,8 @@
+type main is
+select a (
+a.subj_id 	:id
+,a.subj_id 	:GROUP_AUDM
+,a.equal_id :PARENT_GR
+,a.owner_id	:OWN_GR
+)
+in subj_equal%rowtype;

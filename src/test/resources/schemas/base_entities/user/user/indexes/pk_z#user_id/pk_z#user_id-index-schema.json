@@ -1,0 +1,16 @@
+{
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/indexes/user",
+  "$schema" : "../../../../../platform_class_index.json",
+  "class-id" : "USER",
+  "title" : "PK_Z#USER_ID",
+  "uniqueness" : "UNIQUE",
+  "primaryKey" : "1",
+  "properties" : {
+    "id" : {
+      "class-id" : "USER",
+      "index-name" : "PK_Z#USER_ID",
+      "qual" : "ID",
+      "position" : 1
+    }
+  }
+}

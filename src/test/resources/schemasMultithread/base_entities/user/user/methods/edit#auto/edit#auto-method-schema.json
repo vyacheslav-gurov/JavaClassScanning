@@ -1,0 +1,390 @@
+{
+  "$schema" : "../../../../../platform_class_method.json",
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/methods/edit#auto",
+  "id" : "266",
+  "title" : "edit#auto",
+  "description" : "Изменить",
+  "body" : { },
+  "userDriven" : true,
+  "accessibility" : 0,
+  "type" : "simple",
+  "textType" : 1,
+  "defined" : "0",
+  "package" : "Z$USER_EDIT#AUTO",
+  "audit" : {
+    "created" : {
+      "date" : "1998-01-01T00:00:00",
+      "user" : "Лагута О.Н."
+    },
+    "modified" : {
+      "date" : "2021-12-16T14:45:28",
+      "user" : "19699202"
+    }
+  },
+  "status" : "valid",
+  "report" : { },
+  "hints" : "1177806176.1916783128",
+  "isKernel" : false,
+  "props" : [ "", "BUF ", "CMD N", "COMMIT N", "COMPILER 11111011111111FD003", "CREATE N", "CRITICAL N", "DEFHOTKEY Y", "EMPTY_ID N", "FOCUS_VALIDATE 2", "HOTKEY 0114", "IPIPE ", "LOAD_VALIDATE 2", "MULTI N", "OPIPE EDIT_USER", "PARAMS Y", "PRIORITY 100", "REFRESH Y", "RTLBASE 34801", "RUN_MON N", "SHARE N", "STREAM N", "" ],
+  "script" : "SOURCES",
+  "tag" : "CORE",
+  "parameters" : {
+    "P#DEPART" : {
+      "position" : 5,
+      "title" : "P#DEPART",
+      "description" : "Подразделение",
+      "type" : {
+        "$ref" : "../../../../../type/reference/depart_ref/depart_ref-class-schema.json"
+      },
+      "default" : "%THIS%.DEPART",
+      "direction" : "in",
+      "changes" : false,
+      "bindings" : "|DEF P#DEPART %THIS%.DEPART",
+      "flag" : "copy",
+      "criterion" : {
+        "$ref" : "../../../../../type/dictionary/depart/criteria/vw_crit_depart/vw_crit_depart-criteria-schema.json"
+      }
+    },
+    "P#NAME" : {
+      "position" : 1,
+      "title" : "P#NAME",
+      "description" : "Фамилия Имя Отчество",
+      "type" : {
+        "$ref" : "../../../../../type/string/string_100/string_100-class-schema.json"
+      },
+      "default" : "%THIS%.NAME",
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P#SECURITY_ADD" : {
+      "position" : 3,
+      "title" : "P#SECURITY_ADD",
+      "description" : "Добавить в систему доступа",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P#SECURITY_DEL" : {
+      "position" : 4,
+      "title" : "P#SECURITY_DEL",
+      "description" : "Удалить из системы доступа",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P#USERNAME" : {
+      "position" : 2,
+      "title" : "P#USERNAME",
+      "description" : "Сетевое имя",
+      "type" : {
+        "$ref" : "../../../../../type/string/string_30/string_30-class-schema.json"
+      },
+      "default" : "%THIS%.USERNAME",
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "P_ALLOW_FIO" : {
+      "position" : 6,
+      "title" : "P_ALLOW_FIO",
+      "description" : "Разрешать совпадение ФИО",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "d",
+      "changes" : false,
+      "flag" : "copy"
+    }
+  },
+  "variables" : {
+    "V#SECURITY" : {
+      "position" : 1,
+      "title" : "V#SECURITY",
+      "description" : "Признак наличия в системе доступа",
+      "type" : {
+        "$ref" : "../../../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    },
+    "V_ERRM" : {
+      "position" : 2,
+      "title" : "V_ERRM",
+      "description" : "Сообщение",
+      "type" : {
+        "$ref" : "../../../../../type/string/string_1000/string_1000-class-schema.json"
+      },
+      "direction" : "in",
+      "changes" : false,
+      "flag" : "copy"
+    }
+  },
+  "sources" : {
+    "vbscript" : {
+      "$ref" : "src/vbscript.vb"
+    },
+    "validate" : {
+      "$ref" : "src/validate.plp"
+    },
+    "execute" : {
+      "$ref" : "src/execute.plp"
+    }
+  },
+  "controls" : {
+    "0" : {
+      "id" : "5000002000001",
+      "name" : "Form1",
+      "title" : "Изменить",
+      "width" : 9510,
+      "height" : 2250,
+      "position" : 0,
+      "props" : [ ],
+      "type" : "FORM"
+    },
+    "1" : {
+      "id" : "5000002000002",
+      "name" : "Label1",
+      "title" : "Фамилия Имя Отчество",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P#NAME",
+      "tips" : "Поясняющая надпись (Фамилия Имя Отчество)",
+      "top" : 120,
+      "left" : 120,
+      "width" : 2700,
+      "height" : 360,
+      "position" : 1,
+      "tab_index" : 0,
+      "props" : [ ],
+      "type" : "LABEL"
+    },
+    "10" : {
+      "class_id" : {
+        "$ref" : "../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "id" : "5000002000011",
+      "name" : "Check2",
+      "title" : "Удалить",
+      "parent" : {
+        "$ref" : "#/controls/8"
+      },
+      "qualifier" : "%PARAM%.P#SECURITY_DEL",
+      "tips" : "Логическое значение (Удалить из системы доступа)",
+      "top" : 300,
+      "left" : 2280,
+      "width" : 1440,
+      "height" : 240,
+      "position" : 10,
+      "tab_index" : 15,
+      "props" : [ "", "V", "" ],
+      "type" : "CHECK"
+    },
+    "11" : {
+      "id" : "5000002000012",
+      "name" : "OK",
+      "title" : "OK",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "OK",
+      "tips" : "Выполнить метод",
+      "top" : 1680,
+      "left" : 4920,
+      "width" : 2160,
+      "height" : 360,
+      "position" : 11,
+      "tab_index" : 16,
+      "props" : [ "", "V", "" ],
+      "type" : "BUTTON"
+    },
+    "12" : {
+      "id" : "5000002000013",
+      "name" : "CANCEL",
+      "title" : "Отмена",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "CANCEL",
+      "tips" : "Отказ от выполнения",
+      "top" : 1680,
+      "left" : 7200,
+      "width" : 2160,
+      "height" : 360,
+      "position" : 12,
+      "tab_index" : 17,
+      "type" : "BUTTON"
+    },
+    "2" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_100/string_100-class-schema.json"
+      },
+      "id" : "5000002000003",
+      "name" : "Text1",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P#NAME",
+      "tips" : "Фамилия Имя Отчество",
+      "top" : 120,
+      "left" : 2880,
+      "width" : 6480,
+      "height" : 360,
+      "position" : 2,
+      "tab_index" : 3,
+      "props" : [ ],
+      "type" : "TEXT"
+    },
+    "3" : {
+      "id" : "5000002000004",
+      "name" : "Label2",
+      "title" : "Сетевое имя",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P#USERNAME",
+      "tips" : "Поясняющая надпись (Сетевое имя)",
+      "top" : 600,
+      "left" : 120,
+      "width" : 2700,
+      "height" : 360,
+      "position" : 3,
+      "tab_index" : 0,
+      "props" : [ ],
+      "type" : "LABEL"
+    },
+    "4" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_30/string_30-class-schema.json"
+      },
+      "id" : "5000002000005",
+      "name" : "Text2",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P#USERNAME",
+      "tips" : "Сетевое имя",
+      "top" : 600,
+      "left" : 2880,
+      "width" : 6480,
+      "height" : 360,
+      "position" : 4,
+      "tab_index" : 5,
+      "props" : [ ],
+      "type" : "TEXT"
+    },
+    "5" : {
+      "class_id" : {
+        "$ref" : "../../../type/reference/depart_ref/depart_ref-class-schema.json"
+      },
+      "id" : "5000002000006",
+      "name" : "Object2",
+      "title" : "Подразделение",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%.P#DEPART",
+      "tips" : "Объект: Подразделение",
+      "top" : 1080,
+      "left" : 120,
+      "width" : 2700,
+      "height" : 360,
+      "position" : 5,
+      "tab_index" : 8,
+      "props" : [ "", "S", "" ],
+      "type" : "OBJECT"
+    },
+    "6" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/string_20/string_20-class-schema.json"
+      },
+      "id" : "5000002000007",
+      "name" : "Text7",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "depend" : {
+        "$ref" : "#/controls/5"
+      },
+      "qualifier" : "%PARAM%.P#DEPART.CODE",
+      "tips" : "Код",
+      "top" : 1080,
+      "left" : 2880,
+      "width" : 1560,
+      "height" : 360,
+      "position" : 6,
+      "tab_index" : 9,
+      "props" : [ ],
+      "type" : "TEXT"
+    },
+    "7" : {
+      "class_id" : {
+        "$ref" : "../../../type/string/name/name-class-schema.json"
+      },
+      "id" : "5000002000008",
+      "name" : "Text8",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "depend" : {
+        "$ref" : "#/controls/5"
+      },
+      "qualifier" : "%PARAM%.P#DEPART.NAME",
+      "tips" : "Наименование",
+      "top" : 1080,
+      "left" : 4440,
+      "width" : 4920,
+      "height" : 360,
+      "position" : 7,
+      "tab_index" : 10,
+      "props" : [ "", "S", "" ],
+      "type" : "TEXT"
+    },
+    "8" : {
+      "id" : "5000002000009",
+      "name" : "Frame1",
+      "title" : "Система доступа",
+      "parent" : {
+        "$ref" : "#/controls/0"
+      },
+      "qualifier" : "%PARAM%. ",
+      "top" : 1440,
+      "left" : 120,
+      "width" : 3960,
+      "height" : 660,
+      "position" : 8,
+      "tab_index" : 0,
+      "props" : [ "", "S", "#@#", "Vb 0", "" ],
+      "type" : "FRAME"
+    },
+    "9" : {
+      "class_id" : {
+        "$ref" : "../../../type/boolean/boolean/boolean-class-schema.json"
+      },
+      "id" : "5000002000010",
+      "name" : "Check1",
+      "title" : "Добавить",
+      "parent" : {
+        "$ref" : "#/controls/8"
+      },
+      "qualifier" : "%PARAM%.P#SECURITY_ADD",
+      "tips" : "Логическое значение (Добавить в систему доступа)",
+      "top" : 300,
+      "left" : 480,
+      "width" : 1440,
+      "height" : 240,
+      "position" : 9,
+      "tab_index" : 14,
+      "props" : [ "", "V", "" ],
+      "type" : "CHECK"
+    }
+  }
+}

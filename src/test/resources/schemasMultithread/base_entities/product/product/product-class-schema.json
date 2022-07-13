@@ -1,0 +1,132 @@
+{
+  "$schema" : "http://json-schema.org/draft-07/schema#",
+  "base" : "structure",
+  "modified" : "2015-01-01T14:41:28",
+  "description" : "Продукты",
+  "type" : [ "object" ],
+  "entity" : "product",
+  "title" : "Продукты",
+  "properties" : {
+    "com_status" : {
+      "description" : "Обобщенный статус продукта",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 8,
+      "title" : "COM_STATUS",
+      "$ref" : "../../../type/reference/com_status_p_ref/com_status_p_ref-class-schema.json"
+    },
+    "num_dog" : {
+      "filterable" : true,
+      "description" : "Номер договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 1,
+      "title" : "NUM_DOG",
+      "browseable" : true,
+      "$ref" : "../../../type/string/product_num/product_num-class-schema.json",
+      "sequenced" : "SEQ_41498"
+    },
+    "notes" : {
+      "description" : "Примечания",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 7,
+      "title" : "NOTES",
+      "$ref" : "../../../type/memo/memo/memo-class-schema.json"
+    },
+    "filial" : {
+      "description" : "Филиал",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 11,
+      "title" : "FILIAL",
+      "$ref" : "../../../type/reference/branch_ref/branch_ref-class-schema.json"
+    },
+    "date_begining" : {
+      "description" : "Дата начала действия договора",
+      "position" : 3,
+      "title" : "DATE_BEGINING",
+      "$ref" : "../../../type/date/date/date-class-schema.json"
+    },
+    "prod_ins_history" : {
+      "description" : "История смены куратора договора",
+      "position" : 14,
+      "title" : "PROD_INS_HISTORY",
+      "$ref" : "../../../type/collection/loan_inspect_arr/loan_inspect_arr-class-schema.json"
+    },
+    "num_dog_client" : {
+      "description" : "Порядковый номер договора клиента",
+      "position" : 13,
+      "title" : "NUM_DOG_CLIENT",
+      "$ref" : "../../../type/number/short3/short3-class-schema.json"
+    },
+    "date_ending" : {
+      "description" : "Дата окончания действия договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 5,
+      "title" : "DATE_ENDING",
+      "$ref" : "../../../type/date/date/date-class-schema.json"
+    },
+    "user_type" : {
+      "description" : "Пользовательский тип",
+      "position" : 14,
+      "title" : "USER_TYPE",
+      "$ref" : "../../../type/collection/user_type_re_arr/user_type_re_arr-class-schema.json"
+    },
+    "date_begin" : {
+      "filterable" : true,
+      "description" : "Дата создания договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 2,
+      "title" : "DATE_BEGIN",
+      "browseable" : true,
+      "$ref" : "../../../type/date/date/date-class-schema.json"
+    },
+    "internal_code" : {
+      "description" : "ВКИ",
+      "position" : 15,
+      "title" : "INTERNAL_CODE",
+      "$ref" : "../../../type/string/string_25/string_25-class-schema.json"
+    },
+    "array_sum_dog" : {
+      "description" : "Суммы договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 9,
+      "title" : "ARRAY_SUM_DOG",
+      "$ref" : "../../../type/collection/sum_dog_arr/sum_dog_arr-class-schema.json"
+    },
+    "date_close" : {
+      "description" : "Дата закрытия договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 4,
+      "title" : "DATE_CLOSE",
+      "browseable" : false,
+      "$ref" : "../../../type/date/date/date-class-schema.json"
+    },
+    "create_user" : {
+      "filterable" : true,
+      "description" : "Создано пользователем",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 6,
+      "title" : "CREATE_USER",
+      "browseable" : true,
+      "$ref" : "../../../type/reference/user_ref/user_ref-class-schema.json"
+    },
+    "array_oper_dog" : {
+      "description" : "Операции договора",
+      "position" : 12,
+      "title" : "ARRAY_OPER_DOG",
+      "$ref" : "../../../type/collection/doc_com_jour_arr/doc_com_jour_arr-class-schema.json"
+    },
+    "depart" : {
+      "description" : "Подразделение",
+      "position" : 12,
+      "title" : "DEPART",
+      "$ref" : "../../../type/reference/depart_ref/depart_ref-class-schema.json"
+    },
+    "array_dog_acc" : {
+      "description" : "Счета договора",
+      "modified" : "1998-01-01T00:00:00",
+      "position" : 10,
+      "title" : "ARRAY_DOG_ACC",
+      "$ref" : "../../../type/collection/hoz_op_acc_arr/hoz_op_acc_arr-class-schema.json"
+    }
+  },
+  "$id" : "http://sber.ru/schemas/product"
+}

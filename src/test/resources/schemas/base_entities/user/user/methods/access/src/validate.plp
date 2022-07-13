@@ -1,0 +1,17 @@
+begin
+	if P_MESSAGE = 'DEFAULT' then
+		P_DEPART := [DEPART] is not null;
+		P_FILIAL := [FILIAL] is not null;
+		P_GROUP := true;
+		P_SECURITY := Secadmin.CheckUser([USERNAME]);
+		P_CREATE := not nvl(P_SECURITY, false);
+		P_UP := true;
+		P_UP_ALL := false;
+		P_DOWN := true;
+		P_DOWN_LEVEL := null;
+		P_UP_LEVEL := 1;
+	end if;
+	if not P_DEPART then
+		P_DOWN := false;
+	end if;
+end;

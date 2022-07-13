@@ -1,0 +1,174 @@
+--Возвращает ссылку на пользователя по его имени, по умолчанию возвращает ссылку на текущего пользователя.
+function userid(p_username string default null) return ref [USER] is
+	user_id ref [USER] := null;
+	u_name string(32) := null;
+begin
+	if p_username is null then
+		return stdlib.userid;
+	end if;
+	-- Костенко И.С. 04.02.2003
+	u_name := upper(replace(p_username,'-','_'));
+	if instr('1234567890', substr(u_name, 1, 1)) > 0 then
+		null;
+	else
+		select u(u%id) in [USER] where u.[USERNAME] = u_name into user_id;
+	end if;
+	return user_id;
+exception when NO_DATA_FOUND then
+		return null;
+	when TOO_MANY_ROWS then
+		pragma error('Найдено несколько клиентов = '||user_id);
+		return null;
+end;
+
+--Возвращает ссылку на подразделение пользователя по его имени, по умолчанию возвращает ссылку на подразделение текущего пользователя.
+function user_depart(p_username string default user) return ref [DEPART] is
+begin
+	return userid(p_username).[DEPART];
+end;
+
+--Возвращает 1 если в одном подразделении
+function same_depart(p_obj1 string(16),
+					 p_obj2 string(16),
+					 p_class string(16) default 'USER') return string(1) is
+dep1 ref [DEPART];
+dep2 ref [DEPART];
+p_c string(16);
+begin
+	p_c := nvl(p_class, 'USER');
+	if p_c = 'USER' then
+		begin
+			select i(i.[depart]) in ::[user] where i = p_obj1 into dep1;
+			select i(i.[depart]) in ::[user] where i = p_obj2 into dep2;
+			if dep1 is null or dep2 is null then
+				return 0;
+			elsif dep1 = dep2 then
+				return 1;
+			else
+				return same_depart(dep1, dep2, 'DEPART');
+			end if;
+		exception when NO_DATA_FOUND then
+			return null;
+		end;
+
+	elsif p_c = 'DEPART' then
+		if p_obj2 = p_obj1 then
+			return 1;
+		else
+			select i(i.[high]) in ::[depart] where i = p_obj1 into dep1;
+			select i(i.[high]) in ::[depart] where i = p_obj1 into dep1;
+			if dep1 is null and dep2 is null then
+				return 0;
+			end if;
+			if dep1 = p_obj2 or dep2 = p_obj1 or dep1 = dep2 then
+				return 1;
+			else
+				return same_depart(dep1, dep2, 'DEPART');
+			end if;
+		end if;
+	end if;
+	return 0;
+end;
+
+-- Получает USERNAME из ФИО
+Function GET_USERNAME(fio ::[USER].[NAME]%type) return ::[USER].[USERNAME]%type is
+ret		::[USER].[USERNAME]%type;
+io string(2);
+u	ref [USER];
+Begin
+	ret := substr(UPPER(stdlib.fio(fio, 'Ф')), 1, ret%size);
+	Loop
+		Begin
+			locate u in ::[USER] where u.[USERNAME] = ret;
+			If u.[NAME] = fio then
+				exit;
+			else
+				io := substr(replace(UPPER(stdlib.fio(fio, 'И.О.')), '.'), 1, io%size);
+				ret := ret||'_'||io;
+			End if;
+		exception when NO_DATA_FOUND then
+			exit;
+		End;
+	End loop;
+	return ret;
+End;
+
+-- Выбор отделения (головного подразделения) пользователя
+--(первый номер кода подразделения, до '-' или всё)
+-- например подразделение 01-02-03 отделение 01
+Function GetOtd return string is
+ dep string;
+ i integer;
+begin
+	dep := ::[SYSTEM].[VARIABLES].OurDepart.[CODE];
+  --  i:= 2;
+--   i:= SALARY.FUNC_SALARY_DOP4.KOL_NUM_PODR(NULL);
+--	i := instr(dep,'-') - 1;
+	if i > 0 then
+		return substr(dep,1,i);
+	else
+		return dep;
+	end if;
+end;
+
+Function GetUpr return string is
+ dep string;
+  i integer;
+begin
+   	dep := ::[SYSTEM].[VARIABLES].OurDepart.[CODE];
+    --i:= 3+SALARY.FUNC_SALARY_DOP4.KOL_NUM_PODR(NULL);
+    if i>0 then
+	 return  substr(dep,1,i);
+	else
+	 return dep;
+	end if;
+end;
+
+procedure set_rights(p_username string, p_depart ref [DEPART],symbol string(1) default '+') is
+
+begin
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DEPART', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'USER', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'AC_FIN', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'MAIN_DOCUM', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FOLDER_PAY', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DEPOSIT_ORG', symbol);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'CHECK_BOOK', symbol);
+	pragma IF_DEF(TMC);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'TMC_DOCUM', symbol);
+	pragma END_IF;
+	pragma IF_DEF(KASSES);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'KASSES', symbol);
+	pragma END_IF;
+	pragma IF_DEF(RKO);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RKO', symbol);
+	pragma END_IF;
+	pragma IF_DEF(RKO_CUR);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RKO_CUR', symbol);
+	pragma END_IF;
+	pragma IF_DEF(PR_CRED);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FIN_ORDER', symbol);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DECL_ON_GET_CRED', symbol);
+	pragma END_IF;
+	pragma IF_DEF(KRED_PERS);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'KRED_PERS', symbol);
+	pragma END_IF;
+	pragma IF_DEF(KRED_CORP);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'KRED_CORP', symbol);
+	pragma END_IF;
+	pragma IF_DEF(OVERDRAFTS);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'OVERDRAFTS', symbol);
+	pragma END_IF;
+	pragma IF_DEF(SALE);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'SALE', symbol);
+	pragma END_IF;
+end;
+
+--Получение списка образований в виде текста
+function GetEstabUserStr(
+	pUser in ref [USER]
+) return varchar2(2000)
+is
+begin
+	null;
+end;

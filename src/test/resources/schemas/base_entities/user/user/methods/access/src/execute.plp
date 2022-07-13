@@ -1,0 +1,86 @@
+group_id string;
+group_name string;
+prop string(500);
+d ref [DEPART];
+f ref [BRANCH];
+username [USERNAME]%type;
+
+begin
+	username := [USERNAME];
+	if username is null then
+		username := [USER].[LIB].GET_USERNAME([NAME]);
+		[USERNAME] := username;
+		pragma set_this;
+	end if;
+/*
+	if nvl(P_UP,false) and P_UP_LEVEL is not null then
+		if P_UP_LEVEL < 0 or P_UP_LEVEL > (::[DEPART].[LIB].Depart2Level(this.[DEPART])) then
+			pragma error('Уровень вышестоящего подразделения не может быть ниже'||CR$||' уровня подразделения пользователя');
+		end if;
+	end if;
+	
+	if nvl(P_DOWN,false) and P_DOWN_LEVEL is not null then
+		if P_DOWN_LEVEL < 0 or P_DOWN_LEVEL < (::[DEPART].[LIB].Depart2Level(this.[DEPART])) then
+			pragma error('Уровень нижестоящего подразделения не может быть выше'||CR$||' уровня подразделения пользователя');
+		end if;
+	end if;
+	*/
+	If Secadmin.CheckUser(username) then
+		null;
+	else
+	  	prop := '|CONTEXT|';
+		if P_ACCOUNT then
+			prop := prop||'|SESSION '||P_DOMAIN||'\'||P_OSUSER;
+		end if;
+		if P_CREATE then
+			Secadmin.CreateUser(username, [NAME], 'U', null, prop);
+			if prop is not null then
+				Secadmin.EditUser(username, [NAME],'U',null, prop);
+	  		end if;
+		end if;
+	end if;
+	
+	if nvl(P_GROUP,false) then
+		group_id   := '_'||username;
+		group_name := '_'||stdlib.FIO([NAME], 'ф и о');
+		secadmin.CreateUser(group_id, group_name, 'G');
+		secadmin.Insert_User_To_Group(username, group_id);
+
+		if nvl(P_DEPART,false) then
+			secadmin.SetClassRights('DEPART', bool_char(P_GROUP, group_id, username), 1);
+			
+			-- дадим права на подразделение
+			set_rights(bool_char(P_GROUP, group_id, username), this.[DEPART]);
+			
+			-- дадим права на вышестоящие подразделения до N-го уровня включительно
+			if nvl(P_UP,false) then
+				if nvl(P_UP_ALL,false) then
+					d := ::[DEPART].[LIB].Level2Depart(this.[DEPART], nvl(P_UP_LEVEL,0));
+					set_rights(bool_char(P_GROUP, group_id, username), d);
+					DepartDown(bool_char(P_GROUP, group_id, username), d, ::[DEPART].[LIB].Depart2Level(this.[DEPART]));
+				else
+					d := this.[DEPART].[HIGH];
+					while d is not null loop
+						if ::[DEPART].[LIB].Depart2Level(d) >= nvl(P_UP_LEVEL,0) then
+							set_rights(bool_char(P_GROUP, group_id, username), d);
+							d := d.[HIGH];
+						else
+							exit;
+						end if;
+					end loop;
+				end if;
+			end if;
+			
+			-- дадим права на нижестоящее подразделения до N-го уровня включительно
+			if nvl(P_DOWN,false) then
+				DepartDown(bool_char(P_GROUP, group_id, username), this.[DEPART], P_DOWN_LEVEL);
+			end if;
+		end if;
+	
+		if nvl(P_FILIAL,false) then
+			secadmin.SetClassRights('BRANCH', bool_char(P_GROUP, group_id, username), 1);
+			f := this.[FILIAL];
+			set_rights_f(bool_char(P_GROUP, group_id, username), f);
+		end if;
+	end if;
+end;

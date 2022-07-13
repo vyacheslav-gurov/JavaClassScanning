@@ -1,0 +1,35 @@
+-- Возвращает ссылку на пользователя по его
+-- сетевому имени или номеру ответисполнителя
+-- по умолчанию возвращает ссылку на текущего пользователя.
+function userid(p_username string default null) return ref [USER];
+
+-- Возвращает ссылку на подразделение пользователя по его имени, по умолчанию возвращает ссылку на подразделение текущего пользователя.
+function user_depart(p_username string default user) return ref [DEPART];
+
+
+-- Возвращает 1 если p_obj1 и p_obj2 принадлежат одному подразделению
+function same_depart(p_obj1 string(16),
+					 p_obj2 string(16),
+					 p_class string(16) default 'USER') return string(1);
+
+-- Получает USERNAME из ФИО
+Function GET_USERNAME(fio ::[USER].[NAME]%type) return ::[USER].[USERNAME]%type;
+
+---------------------------------------------------------------------
+-- Выбор отделения (головного подразделения) пользователя
+---------------------------------------------------------------------
+Function GetOtd return string;
+--PRAGMA RESTRICT_REFERENCES ( GetOtd, WNDS, WNPS );
+
+-- Выбор управления пользователя
+Function GetUpr return string;
+--PRAGMA RESTRICT_REFERENCES ( GetUpr, WNDS, WNPS );
+
+--выставляет права
+procedure set_rights(p_username string, p_depart ref [DEPART],symbol string(1) default '+');
+
+--Получение списка образований в виде текста
+function GetEstabUserStr(
+	pUser in ref [USER]
+) return varchar2(2000);
+PRAGMA RESTRICT_REFERENCES ( GetEstabUserStr, WNDS, WNPS );

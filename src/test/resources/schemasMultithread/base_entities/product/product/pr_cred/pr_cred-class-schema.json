@@ -1,0 +1,841 @@
+{
+  "$schema" : "http://json-schema.org/draft-07/schema#",
+  "base" : "structure",
+  "parent" : "product",
+  "modified" : "2013-03-28T16:48:44",
+  "description" : "Кредиты",
+  "type" : [ "object" ],
+  "entity" : "product",
+  "title" : "Кредиты",
+  "properties" : {
+    "begin_pay" : {
+      "description" : "Дата начала гашения",
+      "position" : 45,
+      "title" : "BEGIN_PAY",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "tab_number" : {
+      "description" : "Табельный номер",
+      "position" : 90,
+      "title" : "TAB_NUMBER",
+      "$ref" : "../../../../type/string/string_35/string_35-class-schema.json"
+    },
+    "acc_ct_res_cost" : {
+      "description" : "Счет для списания отнесенного на себестоимость резерва",
+      "position" : 30,
+      "title" : "ACC_CT_RES_COST",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "one_day" : {
+      "description" : "Однодневный кредит",
+      "position" : 71,
+      "title" : "ONE_DAY",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "sbp_inf_prosr" : {
+      "description" : "Информация о просрочке",
+      "position" : 113,
+      "title" : "SBP_INF_PROSR",
+      "$ref" : "../../../../type/collection/sbp_inf_pros_arr/sbp_inf_pros_arr-class-schema.json"
+    },
+    "acc_settlement" : {
+      "description" : "Счет для расчетов по кредиту",
+      "position" : 42,
+      "title" : "ACC_SETTLEMENT",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "course_eq" : {
+      "description" : "Курс эквивалента при выдаче",
+      "position" : 21,
+      "title" : "COURSE_EQ",
+      "$ref" : "../../../../type/number/summa_16_6/summa_16_6-class-schema.json"
+    },
+    "summa_debt_cred" : {
+      "description" : "АЕ. Признаки исполнения сервисов",
+      "position" : 123,
+      "title" : "SUMMA_DEBT_CRED",
+      "$ref" : "../../../../type/string/string_50/string_50-class-schema.json"
+    },
+    "prj_kind_cred" : {
+      "description" : "Тип проекта",
+      "position" : 84,
+      "title" : "PRJ_KIND_CRED",
+      "$ref" : "../../../../type/reference/kind_project_ref/kind_project_ref-class-schema.json"
+    },
+    "for_open_pay" : {
+      "description" : "Сумма / процент",
+      "position" : 39,
+      "title" : "FOR_OPEN_PAY",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "stop_calc_prc" : {
+      "description" : "Прекратить начисление процентов",
+      "position" : 24,
+      "title" : "STOP_CALC_PRC",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "comiss_arr" : {
+      "description" : "Комиссии по задолженностям",
+      "position" : 107,
+      "title" : "COMISS_ARR",
+      "$ref" : "../../../../type/collection/debt_comiss_arr/debt_comiss_arr-class-schema.json"
+    },
+    "real_obj" : {
+      "description" : "Реализуемые объекты",
+      "position" : 127,
+      "title" : "REAL_OBJ",
+      "$ref" : "../../../../type/collection/zalog_body_arr/zalog_body_arr-class-schema.json"
+    },
+    "dic_type_cred" : {
+      "description" : "Тип кредита",
+      "position" : 9,
+      "title" : "DIC_TYPE_CRED",
+      "$ref" : "../../../../type/reference/type_cred_ref/type_cred_ref-class-schema.json"
+    },
+    "date_ending_max" : {
+      "description" : "Максимальная дата окончания",
+      "position" : 85,
+      "title" : "DATE_ENDING_MAX",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "packs_of_doc" : {
+      "description" : "Пакеты документов",
+      "position" : 117,
+      "title" : "PACKS_OF_DOC",
+      "$ref" : "../../../../type/collection/packofdoc_arr/packofdoc_arr-class-schema.json"
+    },
+    "period_gash_prc" : {
+      "description" : "Периодичность гашения процентов",
+      "position" : 23,
+      "title" : "PERIOD_GASH_PRC",
+      "$ref" : "../../../../type/reference/periods_oper_ref/periods_oper_ref-class-schema.json"
+    },
+    "cred_obj" : {
+      "description" : "Кредитуемые объекты",
+      "position" : 128,
+      "title" : "CRED_OBJ",
+      "$ref" : "../../../../type/collection/zalog_body_arr/zalog_body_arr-class-schema.json"
+    },
+    "date_give" : {
+      "description" : "Дата выдачи",
+      "position" : 63,
+      "title" : "DATE_GIVE",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "prior_variant" : {
+      "description" : "Вариант погашения задолженностей",
+      "position" : 124,
+      "title" : "PRIOR_VARIANT",
+      "$ref" : "../../../../type/reference/prior_varian_ref/prior_varian_ref-class-schema.json"
+    },
+    "vnb_exceed_prc" : {
+      "description" : "В/б счет для учета просроченных процентов",
+      "position" : 19,
+      "title" : "VNB_EXCEED_PRC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "okohx" : {
+      "description" : "Код ОКОНХ",
+      "position" : 40,
+      "title" : "OKOHX",
+      "$ref" : "../../../../type/reference/okonh_ref/okonh_ref-class-schema.json"
+    },
+    "summa_dog" : {
+      "description" : "Сумма договора",
+      "position" : 4,
+      "title" : "SUMMA_DOG",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "sbp_reg_account" : {
+      "description" : "Счет для расчетов по кредитам УР",
+      "position" : 111,
+      "title" : "SBP_REG_ACCOUNT",
+      "$ref" : "../../../../type/reference/acc_fin_ref/acc_fin_ref-class-schema.json"
+    },
+    "sbe_srok" : {
+      "description" : "SBE. Срок кредита (в месяцах)",
+      "position" : 120,
+      "title" : "SBE_SROK",
+      "$ref" : "../../../../type/number/dig_6/dig_6-class-schema.json"
+    },
+    "acc_bay_valuta" : {
+      "description" : "Счет расходов в нацвалюте для покупки валюты",
+      "position" : 14,
+      "title" : "ACC_BAY_VALUTA",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "sbp_card_num" : {
+      "description" : "Номер банковской карты",
+      "position" : 94,
+      "title" : "SBP_CARD_NUM",
+      "$ref" : "../../../../type/string/string_20/string_20-class-schema.json"
+    },
+    "plan_hist" : {
+      "description" : "История изменения плановых графиков",
+      "position" : 93,
+      "title" : "PLAN_HIST",
+      "$ref" : "../../../../type/collection/plan_hist_arr/plan_hist_arr-class-schema.json"
+    },
+    "sec_type" : {
+      "description" : "Обеспеченность договора",
+      "position" : 34,
+      "title" : "SEC_TYPE",
+      "$ref" : "../../../../type/reference/cred_sec_typ_ref/cred_sec_typ_ref-class-schema.json"
+    },
+    "early_pay" : {
+      "description" : "Условия досрочного погашения",
+      "position" : 91,
+      "title" : "EARLY_PAY",
+      "$ref" : "../../../../type/reference/early_pay_ref/early_pay_ref-class-schema.json"
+    },
+    "dic_obj_cred" : {
+      "description" : "Объект кредитования",
+      "position" : 5,
+      "title" : "DIC_OBJ_CRED",
+      "$ref" : "../../../../type/reference/obj_kred_ref/obj_kred_ref-class-schema.json"
+    },
+    "for_open_acc" : {
+      "description" : "Счет доходов по оплате комиссии за открытие лимита",
+      "position" : 39,
+      "title" : "FOR_OPEN_ACC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "invoice_cond" : {
+      "description" : "Условия востребования",
+      "position" : 73,
+      "title" : "INVOICE_COND",
+      "$ref" : "../../../../type/collection/invoice_cond_arr/invoice_cond_arr-class-schema.json"
+    },
+    "conditions" : {
+      "description" : "Отлагательные условия",
+      "position" : 113,
+      "title" : "CONDITIONS",
+      "$ref" : "../../../../type/collection/delay_cond_arr/delay_cond_arr-class-schema.json"
+    },
+    "prc_dep_turn" : {
+      "description" : "Зависимость процентной ставки от оборотов и темпа курса валюты",
+      "position" : 75,
+      "title" : "PRC_DEP_TURN",
+      "$ref" : "../../../../type/structure/prc_dep_cource/prc_dep_cource-class-schema.json"
+    },
+    "issue_vek" : {
+      "description" : "Договор продажи векселей",
+      "position" : 31,
+      "title" : "ISSUE_VEK",
+      "$ref" : "../../../../type/reference/dog_sel_vek_ref/dog_sel_vek_ref-class-schema.json"
+    },
+    "acc_reserv_debts" : {
+      "description" : "Счет резерва для просроченной задолженности",
+      "position" : 28,
+      "title" : "ACC_RESERV_DEBTS",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "vnb_time_oblig" : {
+      "description" : "В/б счет для учета срочных обязательств",
+      "position" : 17,
+      "title" : "VNB_TIME_OBLIG",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "vnb_unused_line" : {
+      "description" : "В/б счет для неиспользованной кр.линии",
+      "position" : 27,
+      "title" : "VNB_UNUSED_LINE",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "to_bki" : {
+      "description" : "Признак согласия/отказа",
+      "position" : 110,
+      "title" : "TO_BKI",
+      "$ref" : "../../../../type/collection/kb_form_even_arr/kb_form_even_arr-class-schema.json"
+    },
+    "prc_reserv" : {
+      "description" : "Процент резервирования",
+      "position" : 5,
+      "title" : "PRC_RESERV",
+      "$ref" : "../../../../type/structure/procent_reserv/procent_reserv-class-schema.json"
+    },
+    "vnb_open_cr_line" : {
+      "description" : "В/б счет для открытой кр.линии",
+      "position" : 26,
+      "title" : "VNB_OPEN_CR_LINE",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "debt_dog_arr" : {
+      "description" : "Задолженность по договору",
+      "position" : 76,
+      "title" : "DEBT_DOG_ARR",
+      "$ref" : "../../../../type/collection/debt_dog_arr/debt_dog_arr-class-schema.json"
+    },
+    "high_level_cr" : {
+      "description" : "Кредит верхнего уровня",
+      "position" : 65,
+      "title" : "HIGH_LEVEL_CR",
+      "$ref" : "../../../../type/reference/pr_cred_ref/pr_cred_ref-class-schema.json"
+    },
+    "sbp_cr_documents" : {
+      "description" : "Кредитная документация",
+      "position" : 116,
+      "title" : "SBP_CR_DOCUMENTS",
+      "$ref" : "../../../../type/collection/sbp_file_cr__arr/sbp_file_cr__arr-class-schema.json"
+    },
+    "rely_category" : {
+      "description" : "Категория благонадежности",
+      "position" : 118,
+      "title" : "RELY_CATEGORY",
+      "$ref" : "../../../../type/reference/ref_rely_cat/ref_rely_cat-class-schema.json"
+    },
+    "acc_profit_prdeb" : {
+      "description" : "Счет доходов по %% за просроченный кредит",
+      "position" : 42,
+      "title" : "ACC_PROFIT_PRDEB",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_profit_res" : {
+      "description" : "Счет доходов пени за резервирование ресурсов",
+      "position" : 56,
+      "title" : "ACC_PROFIT_RES",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "annuitet" : {
+      "description" : "Аннуитетный платеж",
+      "position" : 67,
+      "title" : "ANNUITET",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "zalog" : {
+      "description" : "Обеспечение",
+      "position" : 5,
+      "title" : "ZALOG",
+      "$ref" : "../../../../type/collection/zalog_arr/zalog_arr-class-schema.json"
+    },
+    "acc_dt_res_cost" : {
+      "description" : "Счет относимых на себестоимость расходов для резерва",
+      "position" : 29,
+      "title" : "ACC_DT_RES_COST",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_reserv" : {
+      "description" : "Счет резерва",
+      "position" : 5,
+      "title" : "ACC_RESERV",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_demand_prc" : {
+      "description" : "Счет требований по получению процентов",
+      "position" : 36,
+      "title" : "ACC_DEMAND_PRC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_profit_prc" : {
+      "description" : "Счет доходов от %% за кредит",
+      "position" : 5,
+      "title" : "ACC_PROFIT_PRC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "ft_own_summa" : {
+      "description" : "Валюта собственных средств",
+      "position" : 133,
+      "title" : "FT_OWN_SUMMA",
+      "$ref" : "../../../../type/reference/ft_money_ref/ft_money_ref-class-schema.json"
+    },
+    "vnb_proc_prc_out" : {
+      "description" : "В/б счет списанных неполученных процентов",
+      "position" : 88,
+      "title" : "VNB_PROC_PRC_OUT",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "list_prol" : {
+      "description" : "Дополнительные соглашения",
+      "position" : 10,
+      "title" : "LIST_PROL",
+      "$ref" : "../../../../type/collection/prols_contract/prols_contract-class-schema.json"
+    },
+    "credit_banks" : {
+      "description" : "История \"Банк Обслуживания Кредита\"",
+      "position" : 102,
+      "title" : "CREDIT_BANKS",
+      "$ref" : "../../../../type/collection/hist_cr_bank_arr/hist_cr_bank_arr-class-schema.json"
+    },
+    "date_payout_ltd" : {
+      "description" : "Предельная дата выдач",
+      "position" : 83,
+      "title" : "DATE_PAYOUT_LTD",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "limit_saldo" : {
+      "description" : "Лимит остатка ссудной задолженности",
+      "position" : 47,
+      "title" : "LIMIT_SALDO",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "acc_credit_res" : {
+      "description" : "Счет для списания резерва",
+      "position" : 7,
+      "title" : "ACC_CREDIT_RES",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "own_sum_prc" : {
+      "description" : "Сумма собственных средств в %",
+      "position" : 131,
+      "title" : "OWN_SUM_PRC",
+      "$ref" : "../../../../type/number/dig_prc/dig_prc-class-schema.json"
+    },
+    "oper_way_out" : {
+      "description" : "Путь выдачи",
+      "position" : 5,
+      "title" : "OPER_WAY_OUT",
+      "$ref" : "../../../../type/reference/way_kred_ref/way_kred_ref-class-schema.json"
+    },
+    "not_auto_plan" : {
+      "description" : "Запрет автоматического переформирования плановых операций",
+      "position" : 46,
+      "title" : "NOT_AUTO_PLAN",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "organization" : {
+      "description" : "Ходатайствующая организация",
+      "position" : 89,
+      "title" : "ORGANIZATION",
+      "$ref" : "../../../../type/reference/uf_ref/uf_ref-class-schema.json"
+    },
+    "reserv_accs" : {
+      "description" : "Зарезервированные счета",
+      "position" : 87,
+      "title" : "RESERV_ACCS",
+      "$ref" : "../../../../type/collection/accs_range_arr/accs_range_arr-class-schema.json"
+    },
+    "acc_debts_to_get" : {
+      "description" : "Счет просроченных процентов к получению",
+      "position" : 13,
+      "title" : "ACC_DEBTS_TO_GET",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_profit_bef" : {
+      "description" : "Счет доходов пени за дострочное погашение кредита",
+      "position" : 58,
+      "title" : "ACC_PROFIT_BEF",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "kind_comiss_pay" : {
+      "description" : "Способ уплаты комиссии за обслуживание ссудного счета",
+      "position" : 115,
+      "title" : "KIND_COMISS_PAY",
+      "$ref" : "../../../../type/variant/case_between_two/case_between_two-class-schema.json"
+    },
+    "acc_profit_k_pen" : {
+      "description" : "Счет доходов от неустойки за просрочку платы за ведение ссудного счета",
+      "position" : 53,
+      "title" : "ACC_PROFIT_K_PEN",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "period_unit" : {
+      "description" : "Единица измерения срока договора",
+      "position" : 89,
+      "title" : "PERIOD_UNIT",
+      "$ref" : "../../../../type/reference/ref_unit_of_time/ref_unit_of_time-class-schema.json"
+    },
+    "region_address" : {
+      "description" : "Район / Населенный пункт",
+      "position" : 112,
+      "title" : "REGION_ADDRESS",
+      "$ref" : "../../../../type/reference/name_city_ref/name_city_ref-class-schema.json"
+    },
+    "source" : {
+      "description" : "Источник кредитования",
+      "position" : 45,
+      "title" : "SOURCE",
+      "$ref" : "../../../../type/reference/source_cred_ref/source_cred_ref-class-schema.json"
+    },
+    "client_req" : {
+      "description" : "Реквизиты  клиента  для расчетов по кредиту",
+      "position" : 68,
+      "title" : "CLIENT_REQ",
+      "$ref" : "../../../../type/variant/req_client/req_client-class-schema.json"
+    },
+    "objects_cred" : {
+      "description" : "Объекты кредитования",
+      "position" : 108,
+      "title" : "OBJECTS_CRED",
+      "$ref" : "../../../../type/collection/object_cred_arr/object_cred_arr-class-schema.json"
+    },
+    "acc_profit_keep" : {
+      "description" : "Счет доходов платы за ведение ссудного счета",
+      "position" : 50,
+      "title" : "ACC_PROFIT_KEEP",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "debtors" : {
+      "description" : "Созаемщики",
+      "position" : 90,
+      "title" : "DEBTORS",
+      "$ref" : "../../../../type/collection/debtors_arr/debtors_arr-class-schema.json"
+    },
+    "num_contr" : {
+      "description" : "Номер контракта",
+      "position" : 66,
+      "title" : "NUM_CONTR",
+      "$ref" : "../../../../type/string/string_70/string_70-class-schema.json"
+    },
+    "copy_to_transh" : {
+      "description" : "Условия линии распространять на транш",
+      "position" : 82,
+      "title" : "COPY_TO_TRANSH",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "sbp_kindcred_nal" : {
+      "description" : "Вид кредита для налогообложения",
+      "position" : 114,
+      "title" : "SBP_KINDCRED_NAL",
+      "$ref" : "../../../../type/reference/kind_cred_na_ref/kind_cred_na_ref-class-schema.json"
+    },
+    "for_open_year" : {
+      "description" : "Плата за лимит в % годовых",
+      "position" : 84,
+      "title" : "FOR_OPEN_YEAR",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "budget" : {
+      "description" : "Признак наличия рассинхронизации даты операций с внешней системой",
+      "position" : 43,
+      "title" : "BUDGET",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "acc_profit_pr_v" : {
+      "description" : "Счет доходов по % полученным в инвалюте",
+      "position" : 38,
+      "title" : "ACC_PROFIT_PR_V",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "actions_loan" : {
+      "description" : "Мероприятия по договору",
+      "position" : 134,
+      "title" : "ACTIONS_LOAN",
+      "$ref" : "../../../../type/collection/actions_loan_arr/actions_loan_arr-class-schema.json"
+    },
+    "acc_res_fine" : {
+      "description" : "Счет доходов от неустойки за резервирование ресурсов",
+      "position" : 61,
+      "title" : "ACC_RES_FINE",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "ft_credit" : {
+      "description" : "Валюта",
+      "position" : 1,
+      "title" : "FT_CREDIT",
+      "$ref" : "../../../../type/reference/ft_money_ref/ft_money_ref-class-schema.json"
+    },
+    "aim_credit" : {
+      "description" : "Цель получения кредита",
+      "position" : 132,
+      "title" : "AIM_CREDIT",
+      "$ref" : "../../../../type/reference/aim_credit_ref/aim_credit_ref-class-schema.json"
+    },
+    "gen_agr" : {
+      "description" : "Генеральное соглашение по кредитным линиям",
+      "position" : 43,
+      "title" : "GEN_AGR",
+      "$ref" : "../../../../type/reference/gen_agreem_f_ref/gen_agreem_f_ref-class-schema.json"
+    },
+    "acc_profit_debpr" : {
+      "description" : "Счет доходов от просроченных % за кредит",
+      "position" : 15,
+      "title" : "ACC_PROFIT_DEBPR",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "last_sec_type" : {
+      "description" : "Последняя расчитанная обеспеченность",
+      "position" : 74,
+      "title" : "LAST_SEC_TYPE",
+      "$ref" : "../../../../type/reference/cred_sec_typ_ref/cred_sec_typ_ref-class-schema.json"
+    },
+    "low_prc_cred" : {
+      "description" : "Льготный кредит",
+      "position" : 35,
+      "title" : "LOW_PRC_CRED",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "acc_profit_pf" : {
+      "description" : "Счет доходов будущих периодов по срочным процентам",
+      "position" : 5,
+      "title" : "ACC_PROFIT_PF",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "vnb_exceed_cred" : {
+      "description" : "В/б счет просроченных кредитов, списанных за счет резерва",
+      "position" : 18,
+      "title" : "VNB_EXCEED_CRED",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "sec_type_history" : {
+      "description" : "История обеспеченности договора",
+      "position" : 81,
+      "title" : "SEC_TYPE_HISTORY",
+      "$ref" : "../../../../type/collection/sec_type_his_arr/sec_type_his_arr-class-schema.json"
+    },
+    "acc_profit_pn_p" : {
+      "description" : "Счет доходов пени по процентам",
+      "position" : 5,
+      "title" : "ACC_PROFIT_PN_P",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "summa_pay" : {
+      "description" : "Сумма гашения",
+      "position" : 44,
+      "title" : "SUMMA_PAY",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "list_pay" : {
+      "description" : "Фактические операции",
+      "position" : 5,
+      "title" : "LIST_PAY",
+      "$ref" : "../../../../type/collection/fact_oper_arr/fact_oper_arr-class-schema.json"
+    },
+    "for_open_bool" : {
+      "description" : "Признак процента",
+      "position" : 40,
+      "title" : "FOR_OPEN_BOOL",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "day_pay_prc" : {
+      "description" : "День гашения процентов",
+      "position" : 8,
+      "title" : "DAY_PAY_PRC",
+      "$ref" : "../../../../type/number/number/number-class-schema.json"
+    },
+    "max_date_use_up" : {
+      "description" : "Предельная дата выборки ссуды",
+      "position" : 111,
+      "title" : "MAX_DATE_USE_UP",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "base_put" : {
+      "description" : "Основание выдачи",
+      "position" : 44,
+      "title" : "BASE_PUT",
+      "$ref" : "../../../../type/reference/base_put_cre_ref/base_put_cre_ref-class-schema.json"
+    },
+    "own_summa" : {
+      "description" : "Сумма собственных средств",
+      "position" : 130,
+      "title" : "OWN_SUMMA",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "acc_cur_for_val" : {
+      "description" : "Счет для текущих валютных операций",
+      "position" : 16,
+      "title" : "ACC_CUR_FOR_VAL",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_prc_to_get" : {
+      "description" : "Счет процентных доходов к получению",
+      "position" : 12,
+      "title" : "ACC_PRC_TO_GET",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "param_for_plan" : {
+      "description" : "Параметры планирования операций",
+      "position" : 76,
+      "title" : "PARAM_FOR_PLAN",
+      "$ref" : "../../../../type/collection/param_for_pl_arr/param_for_pl_arr-class-schema.json"
+    },
+    "acc_prof_nuse" : {
+      "description" : "Счет доходов от неустойки за несвоевременное предоставление документов по целевому расходованию",
+      "position" : 126,
+      "title" : "ACC_PROF_NUSE",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "sbp_date_report" : {
+      "description" : "Дата перехода на новый алгоритм расчета процентов",
+      "position" : 109,
+      "title" : "SBP_DATE_REPORT",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "for_open_fn" : {
+      "description" : "Валюта платы за открытие лимита",
+      "position" : 75,
+      "title" : "FOR_OPEN_FN",
+      "$ref" : "../../../../type/reference/ft_money_ref/ft_money_ref-class-schema.json"
+    },
+    "acc_debts_prc" : {
+      "description" : "Счет просроченной задолженности по процентам",
+      "position" : 5,
+      "title" : "ACC_DEBTS_PRC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_prof_strah" : {
+      "description" : "Счет доходов от неустойки за несвоевременное возобновление страхования",
+      "position" : 128,
+      "title" : "ACC_PROF_STRAH",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "period_pay_prc" : {
+      "description" : "Период уплаты процентов (в днях)",
+      "position" : 47,
+      "title" : "PERIOD_PAY_PRC",
+      "$ref" : "../../../../type/number/short3/short3-class-schema.json"
+    },
+    "client" : {
+      "description" : "Клиент",
+      "position" : 2,
+      "title" : "CLIENT",
+      "$ref" : "../../../../type/reference/client_ref/client_ref-class-schema.json"
+    },
+    "turnover" : {
+      "description" : "Оборачиваемость",
+      "position" : 33,
+      "title" : "TURNOVER",
+      "$ref" : "../../../../type/structure/time_period/time_period-class-schema.json"
+    },
+    "acc_profit_pencr" : {
+      "description" : "Счет доходов пени по кредиту",
+      "position" : 5,
+      "title" : "ACC_PROFIT_PENCR",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "sbp_insur_sum" : {
+      "description" : "Сумма страхового взноса",
+      "position" : 118,
+      "title" : "SBP_INSUR_SUM",
+      "$ref" : "../../../../type/number/summa_22_2/summa_22_2-class-schema.json"
+    },
+    "date_out_debt" : {
+      "description" : "Дата выноса",
+      "position" : 120,
+      "title" : "DATE_OUT_DEBT",
+      "$ref" : "../../../../type/date/date/date-class-schema.json"
+    },
+    "list_plan_pay" : {
+      "description" : "Плановые операции по кредиту",
+      "position" : 5,
+      "title" : "LIST_PLAN_PAY",
+      "$ref" : "../../../../type/collection/plan_op/plan_op-class-schema.json"
+    },
+    "limit_day_debts" : {
+      "description" : "Предельная ежедневная задолженность",
+      "position" : 32,
+      "title" : "LIMIT_DAY_DEBTS",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "vnb_lost_cred" : {
+      "description" : "В/б счет просроченных кредитов, списанных за счет прибыли",
+      "position" : 41,
+      "title" : "VNB_LOST_CRED",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_debts_cr" : {
+      "description" : "Счет просроченной задолженности по кредиту",
+      "position" : 5,
+      "title" : "ACC_DEBTS_CR",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "gr_risk_hist" : {
+      "description" : "Группа риска",
+      "position" : 25,
+      "title" : "GR_RISK_HIST",
+      "$ref" : "../../../../type/collection/hist_cr_risk_gr/hist_cr_risk_gr-class-schema.json"
+    },
+    "sbp_cred_debt" : {
+      "description" : "Задолженности по кредиту",
+      "position" : 115,
+      "title" : "SBP_CRED_DEBT",
+      "$ref" : "../../../../type/collection/sbp_cred_deb_arr/sbp_cred_deb_arr-class-schema.json"
+    },
+    "kind_credit" : {
+      "description" : "Вид кредита",
+      "position" : 37,
+      "title" : "KIND_CREDIT",
+      "$ref" : "../../../../type/reference/kind_credits_ref/kind_credits_ref-class-schema.json"
+    },
+    "acc_prof_dpr_113" : {
+      "description" : "Счет доходов будущих периодов по просроченным  процентам",
+      "position" : 70,
+      "title" : "ACC_PROF_DPR_113",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "acc_prof_dpr_112" : {
+      "description" : "Счет доходов будущих периодов по процентам по просроченным  кредитам",
+      "position" : 69,
+      "title" : "ACC_PROF_DPR_112",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "cond_for_create" : {
+      "description" : "Условие востребования, по которому создан кредит",
+      "position" : 79,
+      "title" : "COND_FOR_CREATE",
+      "$ref" : "../../../../type/reference/invoice_cond_ref/invoice_cond_ref-class-schema.json"
+    },
+    "period_gash_cr" : {
+      "description" : "Периодичность гашения кредита",
+      "position" : 22,
+      "title" : "PERIOD_GASH_CR",
+      "$ref" : "../../../../type/reference/periods_oper_ref/periods_oper_ref-class-schema.json"
+    },
+    "summa_out_debt" : {
+      "description" : "Сумма просроченной задолженности",
+      "position" : 122,
+      "title" : "SUMMA_OUT_DEBT",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "acc_debit_res" : {
+      "description" : "Счет расходов для резерва",
+      "position" : 6,
+      "title" : "ACC_DEBIT_RES",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "start_sum" : {
+      "description" : "Первоначальная сумма договора",
+      "position" : 41,
+      "title" : "START_SUM",
+      "$ref" : "../../../../type/number/summa/summa-class-schema.json"
+    },
+    "vnb_demand_prc" : {
+      "description" : "В/б счет для учета срочных процентов",
+      "position" : 94,
+      "title" : "VNB_DEMAND_PRC",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "debt_first_pay_d" : {
+      "description" : "Решения суда по договору",
+      "position" : 123,
+      "title" : "DEBT_FIRST_PAY_D",
+      "$ref" : "../../../../type/collection/debt_f_pay_arr/debt_f_pay_arr-class-schema.json"
+    },
+    "acc_prof_zal" : {
+      "description" : "Счет доходов от неустойки за несвоевременное оформление залога и страхования",
+      "position" : 127,
+      "title" : "ACC_PROF_ZAL",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "invoice" : {
+      "description" : "До востребования",
+      "position" : 72,
+      "title" : "INVOICE",
+      "$ref" : "../../../../type/boolean/boolean/boolean-class-schema.json"
+    },
+    "account" : {
+      "description" : "Ссудный счет",
+      "position" : 3,
+      "title" : "ACCOUNT",
+      "$ref" : "../../../../type/reference/ac_fin_ref/ac_fin_ref-class-schema.json"
+    },
+    "properties" : {
+      "description" : "Дополнительные свойства",
+      "position" : 92,
+      "title" : "PROPERTIES",
+      "$ref" : "../../../../type/collection/properties_arr/properties_arr-class-schema.json"
+    },
+    "valuta_eq" : {
+      "description" : "Валюта эквивалента",
+      "position" : 20,
+      "title" : "VALUTA_EQ",
+      "$ref" : "../../../../type/reference/ft_money_ref/ft_money_ref-class-schema.json"
+    },
+    "from_bki" : {
+      "description" : "Разрешение на получение информации из БКИ",
+      "position" : 119,
+      "title" : "FROM_BKI",
+      "$ref" : "../../../../type/collection/kb_form_even_arr/kb_form_even_arr-class-schema.json"
+    }
+  },
+  "$id" : "http://sber.ru/schemas/pr_cred"
+}

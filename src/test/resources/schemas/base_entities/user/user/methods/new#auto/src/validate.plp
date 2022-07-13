@@ -1,0 +1,29 @@
+Begin
+	if P_MESSAGE='DEFAULT' then
+		P_SECURITY := false;  -- Признак добавления в систему доступа
+		V_ERRM:= null;
+		P_ALLOW_FIO:= true;		-- [DVP-5617] Операционисту выдается сообщение из клиент-валидатора о существовании пользователя с таким же ФИО
+	elsif P_MESSAGE = 'VALIDATE' then
+		if P_INFO = 'P_USERNAME' then
+     		P_USERNAME := UPPER(P_USERNAME);
+     		user_exists := Secadmin.CheckUser(P_USERNAME); -- Признак наличия в системе доступа
+     		P_SECURITY := P_SECURITY And Not user_exists;  -- Признак добавления в систему доступа
+     	elsif P_INFO = 'P_NAME' then
+--x			P_NAME := stdlib.fio(InitCap(P_NAME), 'Ф И О');	-- [DVP-5616] Замечание 64. Даем возможность заполнять пользователя как в верхнем, так и в нижнем регистре.
+     		if P_USERNAME is null then
+     			P_USERNAME := [LIB].[GET_USERNAME](P_NAME);
+     		end if;
+		elsif P_INFO = 'P_SECURITY' Then
+			P_SECURITY := P_SECURITY And Not user_exists; -- Признак добавления в систему доступа
+		elsif P_INFO = 'OK' then
+			declare
+				u ref [USER];     -- Ссылка на пользователя
+			begin
+				Locate u In [USER] Where UPPER(u.[NAME]) = UPPER(P_NAME);
+				V_ERRM:= '?Уже есть '||bool_char(u.[USERNAME] is null, 'сотрудник', 'пользователь')||' с Фамилией Именем Отчеством ' || NL$ || UPPER(P_NAME) ||NL$|| 'Продолжить?да';
+			exception when NO_DATA_FOUND then
+				null;
+			end;
+     	end if;
+	end If;
+End;

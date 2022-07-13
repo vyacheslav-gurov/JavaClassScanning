@@ -1,0 +1,93 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_obj_role",
+  "id" : "1886798064932",
+  "title" : "VW_CRIT_OBJ_ROLE",
+  "description" : "Доступные группы объекта",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods N", "BaseClass METHOD_RIGHTS%rowtype", "BaseClassIncompatible", "Complex", "FILTER_ID_REQURED", "NoID", "NoSystem", "NotObjects", "PlPlus", "USERCONTEXT 0", "" ],
+  "modified" : "2015-05-28T22:17:33",
+  "tag" : "ACCESS",
+  "properties" : {
+    "m_cl_id" : {
+      "position" : 4,
+      "title" : "M_CL_ID",
+      "description" : "Класс объекта",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "M_CL_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "M_CL_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "m_id" : {
+      "position" : 3,
+      "title" : "M_ID",
+      "description" : "Объект",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "M_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "M_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "se_id" : {
+      "position" : 1,
+      "title" : "SE_ID",
+      "description" : "Группа",
+      "width" : 30,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "SE_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "SE_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "u_name" : {
+      "position" : 2,
+      "title" : "U_NAME",
+      "description" : "Наименование",
+      "width" : 40,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "U_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "U_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

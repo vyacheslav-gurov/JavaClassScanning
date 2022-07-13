@@ -1,0 +1,196 @@
+pragma INCLUDE ([SYSTEM]::[PRODUCTS]);
+
+procedure DepartDown(p_username string, p_depart ref [DEPART], v_down number)
+is
+begin
+	for l in ::[DEPART] where l.[HIGH] = p_depart loop
+		if v_down is null or ::[DEPART].[LIB].Depart2Level(l) <= v_down then
+			set_rights(p_username, l);
+			DepartDown(p_username, l, v_down);
+		end if;
+	end loop;
+end;
+
+-- Распределение доступа по подразделению
+procedure set_rights(p_username string, p_depart ref [DEPART]) is
+
+begin
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DEPART', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'AC_FIN', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'MAIN_DOCUM', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FOLDER_PAY', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'USER', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FACTURA_DOC', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'SPRAV_0406007', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RECONT_ACCOUNT', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FRIENDS', '+');
+	
+	pragma IF_DEF(SALARY);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'STAFF', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(DEPST_PRIV);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'LONG_ORDER', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DEPOSIT_PRIV', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'TRUST_FOR_PROD', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'VID_DEPOSIT', '+');
+	pragma END_IF;
+
+	pragma IF_DEF(DEPOST_ORG);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'DEPOSIT_ORG', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FRAME_CONTRACT', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'VID_DEPOSIT', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(TMC);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'AC_MAT', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'TRUST_DOCUM', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'TMC_DOCUM', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'AUR_DOCUM', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(RKO);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'CHECK_BOOK', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RKO', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(RKO_CUR);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RKO_CUR', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(PR_CRED);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'FIN_ORDER', '+');
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'PR_CRED', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(NOTRADE);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'NOTRADE', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(KRED_PERS);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'KRED_PERS', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(KRED_CORP);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'KRED_CORP', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(OVERDRAFTS);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'OVERDRAFTS', '+');
+	pragma END_IF;
+	pragma IF_DEF(SALE);
+		SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'SALE', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(ZALOG);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'ZALOG', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(RES);
+	SECADMIN.SetObjRightsEx(p_username, p_depart%id, 'DEPART', 'RES_BASE_ACCS', '+');
+	pragma END_IF;
+
+end;
+
+--Распределение доступа по филиалу
+procedure set_rights_f(p_username string, p_filial ref [BRANCH])
+is
+begin
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'USER', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'DEPART', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'AC_FIN', '+');
+
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PL_ARC_USV', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PL_ARC_US', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PL_USV', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PL_US', '+');
+
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CLIENT', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CL_ORG', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CL_PRIV', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CL_BANK_N', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CL_BANK_F', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'DOCUMENT', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'MAIN_DOCUM', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'FOLDER_PAY', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'SPRAV_0406007', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'FACTURA_DOC', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'FORMER_OTV', '+');-- доступ по реквизиту ТБП USER
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CASHIER', '+');-- доступ по реквизиту ТБП KASSES -> AC_FIN (счет кассы)
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'KASSES', '+');-- доступ по реквизиту ТБП AC_FIN (счет кассы)
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'INKAS_BAG', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PAIR_ACC_FIN', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'LIST_ACC_DECL', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'UNFINISHED_OPER', '+');-- доступ по реквизиту ТБП AC_FIN
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'RECONT_ACCOUNT', '+');
+
+	pragma IF_DEF(RES);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'RES_BASE_ACCS', '+');	-- доступ по реквизиту ТБП AC_FIN
+	pragma END_IF;
+	
+	pragma IF_DEF(RKO);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'RKO', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'LIST_INKASSO', '+');	-- доступ по реквизиту ТБП AC_FIN (расчетный счет)
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'CHECK_BOOK', '+');	-- доступ по реквизиту ТБП AC_FIN (расчетный счет)
+	pragma END_IF;
+
+	pragma IF_DEF(RKO_CUR);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'RKO_CUR', '+');
+    pragma END_IF;
+
+    pragma IF_DEF(INKASS);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'SPRAV_INKASS', '+');
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'INKASS', '+');
+    pragma END_IF;
+
+    pragma IF_DEF(NOTRADE);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'NOTRADE', '+');
+   	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'KASSA_V', '+');	-- доступ по реквизиту ТБП NOTRADE
+    pragma END_IF;
+
+    pragma IF_DEF(OVERDRAFTS);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'GEN_AGREEMENT', '+');
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'OVERDRAFTS', '+');
+    pragma END_IF;
+
+    pragma IF_DEF(PR_CRED);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'GEN_AGREEM_FRAME', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'PR_CRED', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'FIN_ORDER', '+');
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'DECL_ON_GET_CRED', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(KRED_CORP);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'KRED_CORP', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(KRED_BANK);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'KRED_BANK', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(GUARANTIES);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'GUARANTIES', '+');
+	pragma END_IF;
+
+	pragma IF_DEF(KRED_PERS);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'KRED_PERS', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(ZALOG);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'ZALOG', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(SALE);
+	SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'SALE', '+');
+	pragma END_IF;
+	
+	pragma IF_DEF(DEPST_PRIV);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'DEPOSIT_PRIV', '+');
+	pragma END_IF;
+
+	pragma IF_DEF(TRC);
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'TRC', '+');
+    SECADMIN.SetObjRightsEx(p_username, p_filial%id, 'BRANCH', 'DOCUM_RC', '+');
+	pragma END_IF;
+
+end;

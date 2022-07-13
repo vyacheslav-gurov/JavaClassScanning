@@ -1,0 +1,41 @@
+type main is
+select t
+(
+t.class_id 										: class_name
+,c.name											: short_class
+,t.short_name 									: short_oper
+,t.name 	    								: oper_name
+,decode(t.accessibility,'2','Да','Нет')			: accessibility
+,decode(t.user_driven,'1','Да','Нет')  			: user_driven
+,t.user_modified								: user_modified
+,to_char(t.modified,'DD/MM/YYYY HH24:MI:SS')    : modified
+,t.id											: oper_id
+,t.status										: stat
+,' '											: st
+,'':hotkey
+)
+ in methods%rowtype
+ ,(classes%rowtype c) 
+where c.id=t.class_id
+union all
+  select t
+(
+t.class_id 										: class_name
+,c.name											: short_class
+,t.short_name 									: short_oper
+,t.name 	    								: oper_name
+,'НЕТ'		 									: accessibility
+,decode(t.user_driven,'1','Ручная','Автомат')	: user_driven
+,'ПЕРЕХОД'										: user_modified
+,to_char(t.modified,'DD/MM/YYYY HH24:MI:SS')    : modified
+,t.id											: oper_id
+,' '											: stat
+,(SELECT st(st.NAME) in STATES%rowtype WHERE ST.ID=t.INITIAL_STATE_ID AND ST.CLASS_ID=t.CLASS_ID)||'->'||
+(SELECT st(st.NAME) in STATES%rowtype WHERE ST.ID=t.FINAL_STATE_ID AND ST.CLASS_ID=t.CLASS_ID)		: st
+,'Ctrl+T' :hotkey
+)
+ in TRANSITIONS%rowtype
+ ,(classes%rowtype c) 
+where c.id=t.class_id
+  ;
+

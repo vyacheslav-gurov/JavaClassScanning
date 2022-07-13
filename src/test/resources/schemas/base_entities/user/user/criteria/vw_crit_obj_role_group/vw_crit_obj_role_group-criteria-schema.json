@@ -1,0 +1,75 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_obj_role_group",
+  "id" : "1886798064704",
+  "title" : "VW_CRIT_OBJ_ROLE_GROUP",
+  "description" : "Группа включена в роль",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "props" : [ "", "AllMethods N", "BaseClass SUBJ_EQUAL%rowtype", "BaseClassIncompatible", "FILTER_ID_REQURED", "NoID", "NoSystem", "NotObjects", "PlPlus", "USERCONTEXT 0", "" ],
+  "modified" : "2015-05-28T21:37:51",
+  "tag" : "ACCESS",
+  "properties" : {
+    "eq_id" : {
+      "position" : 3,
+      "title" : "EQ_ID",
+      "description" : "EQUAL_ID",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "link",
+      "dataSource" : {
+        "text" : "a1.EQUAL_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":EQ_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "se_id" : {
+      "position" : 1,
+      "title" : "SE_ID",
+      "description" : "Группа",
+      "width" : 30,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a1.SUBJ_ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":SE_ID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "u_name" : {
+      "position" : 2,
+      "title" : "U_NAME",
+      "description" : "Наименование",
+      "width" : 40,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "b1.NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":U_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

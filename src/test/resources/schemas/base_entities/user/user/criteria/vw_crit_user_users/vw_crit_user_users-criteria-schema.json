@@ -1,0 +1,466 @@
+{
+  "$schema" : "../../../../../platform_class_criterion.json",
+  "$id" : "https://sber.ru/schemas/base_entities/user/user/criteria/vw_crit_user_users",
+  "id" : "3790",
+  "title" : "VW_CRIT_USER_USERS",
+  "description" : "Система доступа (пользователи)",
+  "conditionSrc" : {
+    "$ref" : "src/condition.plp"
+  },
+  "type" : "filter",
+  "rights" : "type",
+  "isPropagate" : false,
+  "defined" : 0,
+  "hints" : "first_rows use_nl(c1)",
+  "props" : [ "", "AllMethods Y", "HasClass", "NoCheckArrays", "NoCollection", "NotObjects", "PlPlus", "USERCONTEXT 0", "UseStatic", "" ],
+  "modified" : "2011-04-27T18:19:00",
+  "properties" : {
+    "admin" : {
+      "position" : 8,
+      "title" : "ADMIN",
+      "description" : "Администратор модели",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|ADMIN'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":ADMIN",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "app_domain" : {
+      "position" : 20,
+      "title" : "APP_DOMAIN",
+      "description" : "Подразделение",
+      "width" : 10,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a2.C_CODE"
+      },
+      "align" : "top",
+      "base" : "string",
+      "reference" : "a1.C_DEPART",
+      "target" : {
+        "$ref" : "../../../../../type/dictionary/depart/depart-class-schema.json"
+      },
+      "qual" : "DEPART.CODE",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 0,
+      "orderBy" : { },
+      "refQual" : "CODE",
+      "filter" : { }
+    },
+    "class_id" : {
+      "position" : 0,
+      "title" : "CLASS_ID",
+      "description" : "CLASS_ID",
+      "width" : 10,
+      "unvisible" : "invisible",
+      "dataSource" : {
+        "text" : "'USER'"
+      },
+      "qual" : "CLASS_ID",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "context" : {
+      "position" : 13,
+      "title" : "CONTEXT",
+      "description" : "Контекст",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|CONTEXT'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":CONTEXT",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "cprint" : {
+      "position" : 15,
+      "title" : "CPRINT",
+      "description" : "Шаблоны печати",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|SENIOR'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":CPRINT",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "domain_name" : {
+      "position" : 22,
+      "title" : "DOMAIN_NAME",
+      "description" : "Имя подразделения",
+      "width" : 12,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "d1.NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":DOMAIN_NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "initses" : {
+      "position" : 17,
+      "title" : "INITSES",
+      "description" : "Инициализация сессий",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|INIT_SESSION'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":INITSES",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "name" : {
+      "position" : 2,
+      "title" : "NAME",
+      "description" : "Фамилия Имя Отчество",
+      "width" : 20,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "a1.C_NAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : "NAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "nav" : {
+      "position" : 7,
+      "title" : "NAV",
+      "description" : "Навигатор",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|LOCK'),0,'Да','Нет')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":NAV",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "noses" : {
+      "position" : 18,
+      "title" : "NOSES",
+      "description" : "Доступ через СП",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|SESSION'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":NOSES",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "objs" : {
+      "position" : 14,
+      "title" : "OBJS",
+      "description" : "Экземпляры",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|ALLOBJECTS'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":OBJS",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "openses" : {
+      "position" : 16,
+      "title" : "OPENSES",
+      "description" : "Создание сессий",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|OPEN_SESSION'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":OPENSES",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "ora_user" : {
+      "position" : 5,
+      "title" : "ORA_USER",
+      "description" : "Пользователь Oracle",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "$ref" : "src/ora_user-column-src.sql"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":ORA_USER",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "os_user" : {
+      "position" : 19,
+      "title" : "OS_USER",
+      "description" : "Учетная запись СП",
+      "width" : 15,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(b1.OS_DOMAIN||b1.OS_USER,null,'Нет',b1.OS_DOMAIN||'\\'||b1.OS_USER)"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":OS_USER",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "picker" : {
+      "position" : 10,
+      "title" : "PICKER",
+      "description" : "Перенос модели",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|PICKER'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":PICKER",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "prof" : {
+      "position" : 6,
+      "title" : "PROF",
+      "description" : "Профиль",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "NVL(METHOD.EXTRACT_PROPERTY(b1.PROPERTIES,'PROFILE'),'DEFAULT')"
+      },
+      "align" : "top",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":PROF",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "revisor" : {
+      "position" : 12,
+      "title" : "REVISOR",
+      "description" : "Ревизор",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|REVISOR'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":REVISOR",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "sec_domain" : {
+      "position" : 21,
+      "title" : "SEC_DOMAIN",
+      "description" : "Подразделение доступа",
+      "width" : 10,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "d1.ID"
+      },
+      "align" : "top",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":SEC_DOMAIN",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "sref" : {
+      "position" : 3,
+      "title" : "SREF",
+      "description" : "Субъект доступа",
+      "width" : 10,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "b1.USERNAME"
+      },
+      "align" : "top",
+      "base" : "reference",
+      "target" : {
+        "$ref" : "../../../../../metadata/users/users_u/users_u-class-schema.json"
+      },
+      "qual" : ":SREF",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "refType" : 0,
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "status" : {
+      "position" : 4,
+      "title" : "STATUS",
+      "description" : "Статус",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(TO_CHAR(INSTR(NVL(b1.LOCK_STATUS,'X'),'LOCK')),'0',DECODE(TO_CHAR(INSTR(NVL(b1.LOCK_STATUS,'X'),'EXPIRE')),'0','','Пароль истек'),'Блокирован')"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":STATUS",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "uadmin" : {
+      "position" : 9,
+      "title" : "UADMIN",
+      "description" : "Администратор доступа",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|UADMIN'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "qual" : ":UADMIN",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "upicker" : {
+      "position" : 11,
+      "title" : "UPICKER",
+      "description" : "Перенос доступа",
+      "width" : 9,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "DECODE(INSTR(NVL(b1.PROPERTIES,'|'),'|UPICKER'),0,'Нет','Да')"
+      },
+      "align" : "right",
+      "base" : "string",
+      "dataPrecision" : 0,
+      "qual" : ":UPICKER",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "userid" : {
+      "position" : 23,
+      "title" : "USERID",
+      "description" : "UID",
+      "width" : 6,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "b1.USERID"
+      },
+      "align" : "left",
+      "base" : "number",
+      "qual" : ":USERID",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    },
+    "username" : {
+      "position" : 1,
+      "title" : "USERNAME",
+      "description" : "Сетевое имя",
+      "width" : 11,
+      "sizeable" : true,
+      "unvisible" : "default",
+      "dataSource" : {
+        "text" : "b1.USERNAME"
+      },
+      "align" : "top",
+      "base" : "string",
+      "qual" : ":USERNAME",
+      "fetchStyle" : false,
+      "accessCheck" : "no_check",
+      "orderBy" : { },
+      "filter" : { }
+    }
+  },
+  "methods" : [ ],
+  "prints" : [ ]
+}

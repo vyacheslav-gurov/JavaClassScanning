@@ -1,0 +1,115 @@
+{
+  "$schema" : "../../../platform_class.json",
+  "$id" : "https:/sber.ru/schemas/base_entities/user/user/user",
+  "type" : [ "object" ],
+  "title" : "Пользователи",
+  "entity" : "user",
+  "base" : "structure",
+  "aggregate" : "structure",
+  "hasInstances" : true,
+  "isKernel" : false,
+  "isAutonomous" : true,
+  "modified" : "2021-12-16T08:11:16",
+  "shortName" : "0000101110100000000000000",
+  "isCollection" : false,
+  "oracleInterface" : "Z#USER#INTERFACE.CLASS#USER",
+  "storageGroup" : "SMALL",
+  "isHasType" : false,
+  "customProperties" : "|Weight 933783|",
+  "properties" : {
+    "depart" : {
+      "title" : "depart",
+      "description" : "Подразделение",
+      "$ref" : "../../../type/reference/depart_ref/depart_ref-class-schema.json",
+      "required" : "1",
+      "position" : 17,
+      "modified" : "1998-01-01T00:00:00"
+    },
+    "filial" : {
+      "title" : "filial",
+      "description" : "Филиал",
+      "$ref" : "../../../type/reference/branch_ref/branch_ref-class-schema.json",
+      "required" : "1",
+      "position" : 30
+    },
+    "name" : {
+      "title" : "name",
+      "description" : "Фамилия Имя Отчество",
+      "$ref" : "../../../type/string/name/name-class-schema.json",
+      "required" : "1",
+      "position" : 1,
+      "filterable" : false,
+      "browseable" : false,
+      "modified" : "1998-01-01T00:00:00"
+    },
+    "num_tab" : {
+      "title" : "num_tab",
+      "description" : "Табельный номер",
+      "$ref" : "../../../type/string/string_10/string_10-class-schema.json",
+      "required" : "1",
+      "position" : 16,
+      "modified" : "1998-01-01T00:00:00"
+    },
+    "username" : {
+      "title" : "username",
+      "description" : "Сетевое имя",
+      "$ref" : "../../../type/string/string_30/string_30-class-schema.json",
+      "required" : "1",
+      "position" : 2,
+      "modified" : "1998-01-01T00:00:00"
+    }
+  },
+  "methods" : {
+    "access" : {
+      "$ref" : "methods/access/access-method-schema.json"
+    },
+    "delete#auto" : {
+      "$ref" : "methods/delete#auto/delete#auto-method-schema.json"
+    },
+    "edit#auto" : {
+      "$ref" : "methods/edit#auto/edit#auto-method-schema.json"
+    },
+    "lib" : {
+      "$ref" : "methods/lib/lib-method-schema.json"
+    },
+    "new#auto" : {
+      "$ref" : "methods/new#auto/new#auto-method-schema.json"
+    }
+  },
+  "criteria" : {
+    "vw_crit_group_object" : {
+      "$ref" : "criteria/vw_crit_group_object/vw_crit_group_object-criteria-schema.json"
+    },
+    "vw_crit_group_parent" : {
+      "$ref" : "criteria/vw_crit_group_parent/vw_crit_group_parent-criteria-schema.json"
+    },
+    "vw_crit_obj_role" : {
+      "$ref" : "criteria/vw_crit_obj_role/vw_crit_obj_role-criteria-schema.json"
+    },
+    "vw_crit_obj_role_group" : {
+      "$ref" : "criteria/vw_crit_obj_role_group/vw_crit_obj_role_group-criteria-schema.json"
+    },
+    "vw_crit_oper_info" : {
+      "$ref" : "criteria/vw_crit_oper_info/vw_crit_oper_info-criteria-schema.json"
+    },
+    "vw_crit_user" : {
+      "$ref" : "criteria/vw_crit_user/vw_crit_user-criteria-schema.json"
+    },
+    "vw_crit_user_groups" : {
+      "$ref" : "criteria/vw_crit_user_groups/vw_crit_user_groups-criteria-schema.json"
+    },
+    "vw_crit_user_users" : {
+      "$ref" : "criteria/vw_crit_user_users/vw_crit_user_users-criteria-schema.json"
+    }
+  },
+  "indexes" : {
+    "pk_z#user_id" : {
+      "$ref" : "indexes/pk_z#user_id/pk_z#user_id-index-schema.json"
+    }
+  },
+  "triggers" : {
+    "log_z#user" : {
+      "$ref" : "triggers/log_z#user/log_z#user-trigger-schema.json"
+    }
+  }
+}
