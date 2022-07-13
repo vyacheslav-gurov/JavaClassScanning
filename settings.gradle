@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        maven { url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/gradle_plugins_proxy/' }
+        maven {
+            url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-releases/'
+            credentials {
+                username ciUsername
+                password ciPassword
+            }
+        }
+    }
+
+    plugins {
+    	id 'ru.sber.cb.tools.metalist-plugin' version '2021.4.4.9'
+    }
+}
+
+rootProject.name = 'metamodel-api'
+
