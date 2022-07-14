@@ -164,6 +164,11 @@ public class MetaModelFsServiceProxy implements
     }
 
     @Override
+    public void createOrReplaceObjStatics(List<PlatformClass> platformClasses) {
+        platformClassInfoService.createOrReplaceObjStatics(platformClasses);
+    }
+
+    @Override
     public Map<String, Object> getFieldMap(String clazz, String id) {
         return platformClassInfoService.getFieldMap(clazz, id);
     }
