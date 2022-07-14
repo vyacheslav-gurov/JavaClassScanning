@@ -107,7 +107,7 @@ class FsPlatformClassServiceTest extends BasePlatformServiceTest {
         Mockito.when(pcs.getPlatformClass("CHILD")).thenReturn(childPlatformClass);
         Mockito.when(pcs.getPlatformClass("PARENT")).thenReturn(parentPlatformClass);
         FsPlatformClassService fs = new FsPlatformClassService(PathUtils.testResource("schemas").toString(), pcs);
-        String path = fs.getClassPath(childPlatformClass);
+        String path = fs.getClassPath(childPlatformClass.getId());
         assertEquals("/metadata/parent/child", path);
     }
 
