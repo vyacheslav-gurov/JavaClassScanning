@@ -209,6 +209,11 @@ public class MetaModelFsServiceProxy implements
     }
 
     @Override
+    public String getClassPath(String s) {
+        return platformClassService.getClassPath(s);
+    }
+
+    @Override
     public PlatformClassCriterion getCriterion(String clazz, String criterion) {
         return platformCriterionInfoService.getCriterion(clazz, criterion);
     }
