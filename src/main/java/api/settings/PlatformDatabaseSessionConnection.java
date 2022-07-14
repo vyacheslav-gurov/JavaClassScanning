@@ -1,5 +1,6 @@
 package api.settings;
 
+import lombok.Getter;
 import ru.sber.cb.diam.metamodel.impl.db.PlatformSessionService;
 
 import javax.sql.DataSource;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 
 public class PlatformDatabaseSessionConnection implements AutoCloseable {
 
+    @Getter
     private final Connection connection;
     private final PlatformSessionService platformSessionService;
 
