@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import ru.sber.cb.diam.metamodel.impl.db.*;
 import ru.sber.cb.diam.metamodel.services.*;
 import ru.sber.cb.diam.metamodel.services.dto.PlatformClass;
+import ru.sber.cb.diam.metamodel.services.filemodel.FsModelPathService;
 
 import javax.sql.DataSource;
 import java.io.Closeable;
@@ -112,6 +113,11 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
     @Override
     public PlatformClassTableService createPlatformClassTableService(PlatformClassService platformClassService) {
         return createPlatformClassTableService();
+    }
+
+    @Override
+    public FsModelPathService createFsModelPathService() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
