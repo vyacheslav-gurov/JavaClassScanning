@@ -5,8 +5,11 @@ import api.proxy.MetaModelFsServiceProxy;
 import com.google.common.cache.CacheBuilder;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import ru.sber.cb.diam.metamodel.impl.fs.services.ModelFilePathService;
+import ru.sber.cb.diam.metamodel.impl.fs.services.ModelFileServiceFactory;
 import ru.sber.cb.diam.metamodel.services.*;
 import ru.sber.cb.diam.metamodel.services.dto.PlatformClass;
+import ru.sber.cb.diam.metamodel.services.filemodel.FsModelPathService;
 
 @RequiredArgsConstructor
 public class FsPlatformServiceFactory implements PlatformServiceFactory {
@@ -97,6 +100,11 @@ public class FsPlatformServiceFactory implements PlatformServiceFactory {
     @Override
     public PlatformClassTableService createPlatformClassTableService(PlatformClassService platformClassService) {
         return new MetaModelFsServiceProxy(rootPath, platformClassService);
+    }
+
+    @Override
+    public FsModelPathService createFsModelPathService() {
+        return new ModelFilePathService(ModelFileServiceFactory.getService(rootPath));
     }
 
     @Override

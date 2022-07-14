@@ -3,6 +3,7 @@ package api;
 import com.google.common.cache.CacheBuilder;
 import ru.sber.cb.diam.metamodel.services.*;
 import ru.sber.cb.diam.metamodel.services.dto.PlatformClass;
+import ru.sber.cb.diam.metamodel.services.filemodel.FsModelPathService;
 
 public interface PlatformServiceFactory {
     PlatformClassService createPlatformClassService();
@@ -23,4 +24,5 @@ public interface PlatformServiceFactory {
     PlatformIndexColumnService createPlatformIndexColumnService(PlatformClassService platformClassService);
     PlatformClassTableService createPlatformClassTableService();
     PlatformClassTableService createPlatformClassTableService(PlatformClassService platformClassService);
+    FsModelPathService createFsModelPathService();
 }
