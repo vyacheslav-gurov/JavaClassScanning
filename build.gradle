@@ -42,7 +42,7 @@ repositories {
 
 
 dependencies {
-    implementation("ru.sber.cb.diam:metamodel:2022.3.1.16")
+    implementation("ru.sber.cb.diam:metamodel:2022.3.1.17")
     api 'ru.sber.cb.diam:metamodel-services:2022.3.1.12'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
