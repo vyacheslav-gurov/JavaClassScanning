@@ -62,10 +62,23 @@ dependencies {
 publishing {
     repositories {
         maven {
+            name "Sigma"
             afterEvaluate {
                 url version.endsWith('SNAPSHOT') ?
                         "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-snapshots" :
                         "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-releases"
+                credentials {
+                    username ciUsername
+                    password ciPassword
+                }
+            }
+        }
+        maven {
+            name "Delta"
+            afterEvaluate {
+                url version.endsWith('SNAPSHOT') ?
+                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-snapshots" :
+                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-releases"
                 credentials {
                     username ciUsername
                     password ciPassword

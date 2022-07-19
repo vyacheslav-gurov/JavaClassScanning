@@ -1,6 +1,7 @@
 
 TAGGER_JOB_NAME="CBP/ekp/cb/update_tag_on_commit_all_branch"
-TUZ_BUILD='CAB-SA-CI000602'
+TUZ_SIGMA='CAB-SA-CI000602'
+TUZ_DELTA='CAB-SA-DVO00220'
 
 pipeline {
 
@@ -61,7 +62,7 @@ pipeline {
 
         stage(' Set build name ') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
+                withCredentials([usernamePassword(credentialsId: "${TUZ_SIGMA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                     script {
                         def BUILD_VERSION = sh(script: './gradlew version -PciUsername=$ciUsername -PciPassword=$ciPassword | grep "Version:" | awk \'{printf $2}\'', returnStdout: true)
                         println "GRADLE VERSION: $BUILD_VERSION"
@@ -73,9 +74,9 @@ pipeline {
 
         stage(' Build ') {
             steps {
-                    withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
+                    withCredentials([usernamePassword(credentialsId: "${TUZ_SIGMA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                         script {
-                            if ( ( env.BRANCH_NAME.matches('PR-[0-9]+') && REAL_BRANCH.contains('feature/') ) || ( env.BRANCH_NAME.matches('PR-[0-9]+') && REAL_BRANCH.contains('bugfix/') ) || REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') ) {
+                            if ( REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) ) {
                                 echo "BUILD NOW"
                                 sh './gradlew clean build -PciUsername=$ciUsername -PciPassword=$ciPassword'
                             } else {
@@ -86,16 +87,33 @@ pipeline {
             }
         }
 
-        stage(' Publish ') {
+        stage(' Publish Sigma') {
+            when {
+                expression { REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) }
+            }
             steps {
-                withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
+                withCredentials([usernamePassword(credentialsId: "${TUZ_SIGMA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                     script {
-                        if ( REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && REAL_BRANCH.contains('feature/') ) || ( env.BRANCH_NAME.matches('PR-[0-9]+') && REAL_BRANCH.contains('bugfix/') ) ) {
-                            echo "PUBLISH HERE"
-                            sh './gradlew publish -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
-                        } else {
-                            echo "DO NOT PUBLISH FOR THIS BRANCH"
+                        ansiColor('xterm') {
+                            echo "\033[32m############################## Публикация проекта под ТУЗ = ${TUZ_SIGMA}\033[0m"
                         }
+                        sh './gradlew publishAllPublicationsToSigmaRepository -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
+                    }
+                }
+            }
+        }
+
+        stage(' Publish Delta') {
+            when {
+                expression { REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${TUZ_DELTA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
+                    script {
+                        ansiColor('xterm') {
+                            echo "\033[32m############################## Публикация проекта под ТУЗ = ${TUZ_DELTA}\033[0m"
+                        }
+                        sh './gradlew publishAllPublicationsToDeltaRepository -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
                     }
                 }
             }
