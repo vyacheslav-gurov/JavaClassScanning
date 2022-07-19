@@ -1,11 +1,29 @@
 plugins {
     id 'java'
+    id "org.jsonschema2dataclass" version "3.0.0"
+    id 'application'
     id 'maven-publish'
     id 'ru.sber.cb.tools.metalist-plugin'
 }
-apply plugin: 'java-library'
 
 group 'ru.sber.cb.diam'
+
+java {
+    withSourcesJar()
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.suppressGeneratorVersionInfoComment=true',
+            '-Amapstruct.verbose=true'
+    ]
+}
+
+
+startScripts {
+    classpath += files('src/main/resources/schemas')
+}
 
 repositories {
     mavenLocal()
@@ -40,18 +58,29 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    implementation("ru.sber.cb.diam:metamodel:2022.3.1.17")
-    api 'ru.sber.cb.diam:metamodel-services:2022.3.1.12'
+    implementation 'ru.sber.cb.diam:metamodel-services:2022.3.1.12'
 
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.apache.commons:commons-io:1.3.2'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.oracle.database.jdbc:ojdbc8:21.1.0.0'
+    implementation 'com.oracle.database.jdbc:ucp:21.1.0.0'
+    implementation 'commons-dbutils:commons-dbutils:1.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
+
     implementation('com.zaxxer:HikariCP:5.0.0') {
         exclude group: 'org.slf4j'
     }
-    implementation 'commons-dbutils:commons-dbutils:1.7'
     implementation("com.google.guava:guava:31.0.1-jre")
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
     testImplementation(platform('org.junit:junit-bom:5.8.1'))
     testImplementation('org.junit.jupiter:junit-jupiter')
@@ -59,13 +88,67 @@ dependencies {
     testImplementation('org.mockito:mockito-all:1.10.19')
 }
 
+jsonSchema2Pojo {
+    targetPackage = 'ru.sber.cb.diam.metamodel.impl.dto.fs'
+    source.setFrom files("${project.rootDir}/src/main/resources/schemas")
+    useTitleAsClassname = true
+    removeOldOutput = true
+    targetVersion = "11"
+    generateBuilders = true
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += ['build/generated/sources/js2d/main']
+        }
+    }
+}
+
+jar {
+    manifest {
+        afterEvaluate {
+            attributes(
+                    "Diam-MetaModel-Version": project.version,
+                    "Diam-MetaModel-Time": new Date().toInstant().toString()
+            )
+        }
+    }
+}
+
+sourcesJar {
+    dependsOn 'generateJsonSchema2DataClass'
+    duplicatesStrategy = 'exclude'
+}
+
 publishing {
     repositories {
         maven {
+            name "Sigma"
             afterEvaluate {
                 url version.endsWith('SNAPSHOT') ?
                         "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-snapshots" :
                         "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-releases"
+                credentials {
+                    username ciUsername
+                    password ciPassword
+                }
+            }
+        }
+        maven {
+            name "Delta"
+            afterEvaluate {
+                url version.endsWith('SNAPSHOT') ?
+                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-snapshots" :
+                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-releases"
                 credentials {
                     username ciUsername
                     password ciPassword
