@@ -52,6 +52,11 @@ public abstract class ReflectionPlatformServiceFactory {
     }
 
     @SneakyThrows
+    protected Object invokeClassMethodTypeParams(Object service, String methodName, TypeParam... params) {
+        return service.getClass().getDeclaredMethod(methodName, objectToTypeArrayTypeParam(params)).invoke(service, Arrays.stream(params).map(TypeParam::getValue).toArray());
+    }
+
+    @SneakyThrows
     protected <T> T getServiceInstance(Class<T> clazz, Object... params) {
         return clazz.getDeclaredConstructor(objectToTypeArray(params)).newInstance(params);
     }
