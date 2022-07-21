@@ -19,12 +19,12 @@ public class PlatformDatabaseSessionConnection extends ReflectionPlatformService
     }
 
     public void open() throws SQLException {
-        invokeClassMethod(platformSessionService, "executeOpen", this.connection);
+        invokeClassMethodTypeParams(platformSessionService, "executeOpen", TypeParam.builder().type(Connection.class).value(this.connection).build());
     }
 
     @Override
     public void close() throws SQLException {
-        invokeClassMethod(platformSessionService, "executeClose", this.connection);
+        invokeClassMethodTypeParams(platformSessionService, "executeClose", TypeParam.builder().type(Connection.class).value(this.connection).build());
         this.connection.close();
     }
 }
