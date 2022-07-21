@@ -13,6 +13,7 @@ import java.util.zip.ZipInputStream;
 class MetamodelVersionService {
 
     private final static String DEFAULT = "2022.3";
+    private final static String SNAPSHOT = "SNAPSHOT";
     private final static String VERSION_FOLDER = "metamodel-impl";
 
     protected static String getCurrentVersion(String path) {
@@ -32,7 +33,7 @@ class MetamodelVersionService {
 
     protected static String getLastVersion(ClassLoader classLoader) {
         int intVersion = getAllVersions(classLoader).stream()
-                .filter(str -> !str.equals("SNAPSHOT"))
+                .filter(str -> !str.equals(SNAPSHOT))
                 .map(Integer::parseInt)
                 .mapToInt(v -> v)
                 .max()
@@ -69,9 +70,8 @@ class MetamodelVersionService {
     }
 
     private static String getMajorVersionName(String version) {
-        final String snapshot = "SNAPSHOT";
-        if (version.contains(snapshot)) {
-            return snapshot;
+        if (version.contains(SNAPSHOT)) {
+            return SNAPSHOT;
         }
         String[] split = version.split("\\.");
         if (split.length < 2) {
