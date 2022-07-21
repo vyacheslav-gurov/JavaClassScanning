@@ -1,10 +1,7 @@
-package api.db;
+package api;
 
-import api.PlatformServiceFactory;
 import com.google.common.cache.CacheBuilder;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.dbutils.QueryRunner;
-import ru.sber.cb.diam.metamodel.impl.db.*;
 import ru.sber.cb.diam.metamodel.services.*;
 import ru.sber.cb.diam.metamodel.services.dto.PlatformClass;
 import ru.sber.cb.diam.metamodel.services.filemodel.FsModelPathService;
@@ -13,13 +10,13 @@ import javax.sql.DataSource;
 import java.io.Closeable;
 import java.io.IOException;
 
-@RequiredArgsConstructor
-public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeable {
+public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory implements PlatformServiceFactory, Closeable {
     private final DataSource dataSource;
     private final String schema;
     private final QueryRunner queryRunner;
 
-    public DbPlatformServiceFactory(QueryRunner queryRunner, String schema) {
+    protected DbPlatformServiceFactory(QueryRunner queryRunner, String schema, ClassLoader classLoader) {
+        super(classLoader);
         this.schema = schema;
         this.dataSource = queryRunner.getDataSource();
         this.queryRunner = queryRunner;
@@ -27,7 +24,7 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformClassService createPlatformClassService() {
-        return new DbAndSystemPlatformClassService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbAndSystemPlatformClassService, queryRunner, schema);
     }
 
     @Override
@@ -37,17 +34,17 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformClassService createCachedPlatformClassService() {
-        return new CachedDbAndSystemPlatformClassService(createPlatformClassService());
+        return getServiceInstanceFromNameAndTypeParams(CachedDbAndSystemPlatformClassService, TypeParam.builder().type(PlatformClassService.class).value(createPlatformClassService()).build());
     }
 
     @Override
     public PlatformClassService createCachedPlatformClassService(CacheBuilder<String, PlatformClass> cacheBuilder) {
-        return new CachedDbAndSystemPlatformClassService(createPlatformClassService(), cacheBuilder);
+        return getServiceInstanceFromNameAndTypeParams(CachedDbAndSystemPlatformClassService, TypeParam.builder().type(PlatformClassService.class).value(createPlatformClassService()).build(), TypeParam.builder().type(cacheBuilder.getClass()).value(cacheBuilder).build());
     }
 
     @Override
     public PlatformClassInfoService createPlatformClassInfoService() {
-        return new DbAndSystemPlatformClassInfoService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbAndSystemPlatformClassInfoService, queryRunner, schema);
     }
 
     @Override
@@ -57,7 +54,7 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformCriterionInfoService createPlatformCriterionInfoService() {
-        return new DbPlatformCriterionInfoService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformCriterionInfoService, queryRunner, schema);
     }
 
     @Override
@@ -67,17 +64,17 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformCriterionComplexService createPlatformCriterionComplexService() {
-        return new DbPlatformCriterionComplexService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformCriterionComplexService, queryRunner, schema);
     }
 
     @Override
     public PlatformCriterionComplexService createPlatformCriterionComplexService(PlatformClassService platformClassService) {
-        return new DbPlatformCriterionComplexService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformCriterionComplexService, queryRunner, schema);
     }
 
     @Override
     public PlatformMethodInfoService createPlatformMethodInfoService() {
-        return new DbPlatformMethodInfoService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformMethodInfoService, queryRunner, schema);
     }
 
     @Override
@@ -97,7 +94,7 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformIndexColumnService createPlatformIndexColumnService() {
-        return new DbPlatformIndexColumnService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformIndexColumnService, queryRunner, schema);
     }
 
     @Override
@@ -107,7 +104,7 @@ public class DbPlatformServiceFactory implements PlatformServiceFactory, Closeab
 
     @Override
     public PlatformClassTableService createPlatformClassTableService() {
-        return new DbPlatformClassTableService(queryRunner, schema);
+        return getServiceInstanceFromNameAndParams(DbPlatformClassTableService, queryRunner, schema);
     }
 
     @Override

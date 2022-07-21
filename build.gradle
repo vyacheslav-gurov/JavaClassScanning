@@ -4,8 +4,13 @@ plugins {
     id 'ru.sber.cb.tools.metalist-plugin'
 }
 apply plugin: 'java-library'
+sourceCompatibility = "11"
 
 group 'ru.sber.cb.diam'
+
+java {
+    withSourcesJar()
+}
 
 repositories {
     mavenLocal()
