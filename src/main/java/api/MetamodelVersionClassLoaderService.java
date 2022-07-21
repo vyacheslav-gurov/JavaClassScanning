@@ -1,5 +1,6 @@
 package api;
 
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -12,11 +13,10 @@ class MetamodelVersionClassLoaderService {
 
     @SneakyThrows
     protected ClassLoader getClassLoader() {
-        ClassLoader thisClassLoader = this.getClass().getClassLoader();
-        URL resource = thisClassLoader.getResource("metamodel-impl/" + getMajorVersionName());
-
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        URL versionFolded = MetamodelVersionService.getVersionFolded(classLoader, version);
         FixedLocatedArchiveLoader loader = new FixedLocatedArchiveLoader(
-                new URL[]{resource}, thisClassLoader
+                new URL[]{versionFolded}, classLoader
         );
         loader.addAppliedPackages(".");
         List.of(
@@ -30,18 +30,5 @@ class MetamodelVersionClassLoaderService {
         ).forEach(loader::addNotAppliedPackages);
 
         return loader;
-    }
-
-    private String getMajorVersionName() {
-        final String snapshot = "SNAPSHOT";
-        if (version.contains(snapshot)) {
-            return snapshot;
-        }
-        String[] split = version.split("\\.");
-        if (split.length < 2) {
-            return split[0];
-        }
-        return split[0] + split[1];
-
     }
 }
