@@ -25,7 +25,8 @@ class MetamodelVersionClassLoaderService {
                 "ru.sber.cb.diam.metamodel.services.",
                 "com.fasterxml.jackson",
                 "jdk.",
-                "com.zaxxer.hikari."
+                "com.zaxxer.hikari.",
+                "javax."
         ).forEach(loader::addNotAppliedPackages);
 
         return loader;
