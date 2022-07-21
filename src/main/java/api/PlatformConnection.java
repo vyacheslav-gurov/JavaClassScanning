@@ -1,4 +1,4 @@
-package api.settings;
+package api;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

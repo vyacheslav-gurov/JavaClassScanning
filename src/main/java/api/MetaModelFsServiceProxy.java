@@ -1,13 +1,12 @@
-package api.proxy;
+package api;
 
-import ru.sber.cb.diam.metamodel.impl.fs.*;
 import ru.sber.cb.diam.metamodel.services.*;
 import ru.sber.cb.diam.metamodel.services.dto.*;
 
 import java.util.List;
 import java.util.Map;
 
-public class MetaModelFsServiceProxy implements
+class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implements
         PlatformClassInfoService,
         PlatformClassService,
         PlatformClassTableService,
@@ -26,16 +25,18 @@ public class MetaModelFsServiceProxy implements
     private final PlatformIndexColumnService platformIndexColumnService;
     private final PlatformMethodInfoService platformMethodInfoService;
 
-    public MetaModelFsServiceProxy(String rootPath,
-                                   PlatformClassService platformClassService) {
-        this.platformClassInfoService = new FsPlatformClassInfoService(rootPath, platformClassService);
-        this.platformClassService = new FsPlatformClassService(rootPath, platformClassService);
-        this.platformClassTableService = new FsPlatformClassTableService(rootPath, platformClassService);
-        this.platformClassTriggerInfoService = new FsPlatformTriggerInfoService(rootPath, platformClassService);
-        this.platformCriterionComplexService = new FsPlatformCriterionComplexService(rootPath, platformClassService);
-        this.platformCriterionInfoService = new FsPlatformCriterionInfoService(rootPath, platformClassService);
-        this.platformIndexColumnService = new FsPlatformIndexColumnService(rootPath, platformClassService);
-        this.platformMethodInfoService = new FsPlatformMethodInfoService(rootPath, platformClassService);
+    protected MetaModelFsServiceProxy(String rootPath,
+                                      PlatformClassService platformClassService, ClassLoader classLoader) {
+        super(classLoader);
+        TypeParam[] typeParams = new TypeParam[]{TypeParam.builder().type(rootPath.getClass()).value(rootPath).build(), TypeParam.builder().type(PlatformClassService.class).value(platformClassService).build()};
+        this.platformClassInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassInfoService, typeParams);
+        this.platformClassService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassService, typeParams);
+        this.platformClassTableService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassTableService, typeParams);
+        this.platformClassTriggerInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformTriggerInfoService, typeParams);
+        this.platformCriterionComplexService = getServiceInstanceFromNameAndTypeParams(FsPlatformCriterionComplexService, typeParams);
+        this.platformCriterionInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformCriterionInfoService, typeParams);
+        this.platformIndexColumnService = getServiceInstanceFromNameAndTypeParams(FsPlatformIndexColumnService, typeParams);
+        this.platformMethodInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformMethodInfoService, typeParams);
     }
 
     @Override

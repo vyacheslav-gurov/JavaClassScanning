@@ -4,8 +4,13 @@ plugins {
     id 'ru.sber.cb.tools.metalist-plugin'
 }
 apply plugin: 'java-library'
+sourceCompatibility = "11"
 
 group 'ru.sber.cb.diam'
+
+java {
+    withSourcesJar()
+}
 
 repositories {
     mavenLocal()
@@ -42,7 +47,7 @@ repositories {
 
 
 dependencies {
-    implementation("ru.sber.cb.diam:metamodel:2022.3.2-CBNII-1112-SNAPSHOT")
+
     api 'ru.sber.cb.diam:metamodel-services:2022.3.2-CBNII-1112-SNAPSHOT'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
