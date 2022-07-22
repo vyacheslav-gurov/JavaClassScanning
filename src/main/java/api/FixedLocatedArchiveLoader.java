@@ -106,6 +106,7 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
         List<File> jars = getFiles(url.getFile());
         for (File jar : jars) {
             try {
+                addURL(jar.toURL());
                 jarFile = new JarFile(jar);
                 ZipEntry entry = jarFile.getEntry(classFile);
                 if (entry != null) {
@@ -204,5 +205,4 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
         realFile = realFile.getCanonicalFile();
         return realFile.toURI().toURL();
     }
-
 }
