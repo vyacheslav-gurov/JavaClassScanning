@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+import static api.MetamodelVersionService.getCurrentVersion;
 import static api.MetamodelVersionService.getLastVersion;
 
 public class MetamodelAPI {
@@ -30,8 +31,9 @@ public class MetamodelAPI {
             return this;
         }
 
-        public MetamodelAPI buildLastVersion() {
-            this.version = getLastVersion(this.getClass().getClassLoader());
+        public MetamodelAPI build() {
+            String currentVersion = getCurrentVersion(this.path);
+            this.version = currentVersion == null ? getLastVersion(this.getClass().getClassLoader()) : currentVersion;
             return new MetamodelAPI(this);
         }
 
