@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -23,6 +25,7 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
 
     private List<String> appliedPackages;
     private List<String> notAppliedPackages;
+    private final static Map<Path, Boolean> unzipedJars = new ConcurrentHashMap<>();
 
 
     protected FixedLocatedArchiveLoader(URL[] urls, ClassLoader parent) {
@@ -141,12 +144,14 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
     private List<File> getSubJars(String url) throws IOException {
         String[] split = url.split("!");
         Path path = Path.of(split[0].replace("file:", ""));
-        JarFile jarfile = new JarFile(path.toFile());
         String impl = split[1].substring(1);
 
         boolean needAllInFolder = !impl.endsWith(".jar");
         Path source = path.getParent().resolve(path.getFileName().toString().replace(".", "_"));
-        unzipJar(source.toString(), path.toString());
+        if (unzipedJars.get(path) == null) {
+            unzipJar(source.toString(), path.toString());
+            unzipedJars.put(path, true);
+        }
 
         Path sourcePath = Path.of(source + "/" + impl);
         if (needAllInFolder) {
