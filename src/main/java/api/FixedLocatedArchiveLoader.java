@@ -143,7 +143,7 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
 
     private List<File> getSubJars(String url) throws IOException {
         String[] split = url.split("!");
-        Path path = Path.of(split[0].replace("file:", ""));
+        Path path = Path.of(split[0].replace("file:/", "").replace("file:", ""));
         String impl = split[1].substring(1);
 
         boolean needAllInFolder = !impl.endsWith(".jar");
