@@ -545,8 +545,8 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
-    public void compileUpdatedMethod() {
-        platformMethodInfoService.compileUpdatedMethod();
+    public void compileMethods(List<PlatformClassMethod> methods) {
+        platformMethodInfoService.compileMethods(methods);
     }
 
     @Override
