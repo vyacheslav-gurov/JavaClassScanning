@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,7 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
          * If entry is found, we construct class instance from read bytes.
          * The bytes are read in readClassBytesFromFile method.
          */
-        List<File> jars = getFiles(url.getFile());
+        List<File> jars = getFiles(url);
         for (File jar : jars) {
             try {
                 addURL(jar.toURL());
@@ -129,22 +130,24 @@ class FixedLocatedArchiveLoader extends URLClassLoader {
         return null;
     }
 
-    private List<File> getFiles(String url) throws IOException {
-        if (url.contains(".jar!")) {
+    @SneakyThrows
+    private List<File> getFiles(URL url) throws IOException {
+        if (url.getFile().contains(".jar!")) {
             return getSubJars(url);
         } else {
-            if (!url.endsWith(".jar")) {
-                return Files.walk(Path.of(url.substring(0, url.length() - 3))).map(Path::toFile).collect(Collectors.toList());
+            if (!url.getFile().endsWith(".jar")) {
+                return Files.walk(Path.of(url.getFile().substring(0, url.getFile().length() - 3))).map(Path::toFile).collect(Collectors.toList());
             } else {
-                return List.of(new File(url));
+                return List.of(new File(url.toURI()));
             }
         }
     }
 
-    private List<File> getSubJars(String url) throws IOException {
-        String[] split = url.split("!");
-        Path path = Path.of(split[0].replace("file:/", "").replace("file:", ""));
-        String impl = split[1].substring(1);
+    @SneakyThrows
+    private List<File> getSubJars(URL url) throws IOException {
+        JarURLConnection connection = (JarURLConnection) url.openConnection();
+        Path path = Paths.get(connection.getJarFileURL().toURI());
+        String impl = connection.getEntryName();
 
         boolean needAllInFolder = !impl.endsWith(".jar");
         Path source = path.getParent().resolve(path.getFileName().toString().replace(".", "_"));
