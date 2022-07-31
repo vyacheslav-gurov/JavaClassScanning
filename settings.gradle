@@ -50,4 +50,3 @@ pluginManagement {
     }
 }
 rootProject.name = 'metamodel-api'
-
