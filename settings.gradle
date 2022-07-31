@@ -49,6 +49,5 @@ pluginManagement {
         id 'ru.sber.cb.tools.metalist-plugin' version '2021.4.4.11'
     }
 }
-
 rootProject.name = 'metamodel-api'
 
