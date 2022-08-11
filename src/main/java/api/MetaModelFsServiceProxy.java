@@ -40,7 +40,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
-    public List<PlatformClassField> getFields(String clazz) {
+    public Iterable<PlatformClassField> getFields(String clazz) {
         return platformClassInfoService.getFields(clazz);
     }
 
