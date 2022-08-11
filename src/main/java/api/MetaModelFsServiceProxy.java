@@ -40,13 +40,8 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
-    public List<PlatformClassField> getFieldsWithDefaultValue(String clazz) {
-        return platformClassInfoService.getFieldsWithDefaultValue(clazz);
-    }
-
-    @Override
-    public List<PlatformClassField> getFieldsWithoutDefaultValue(String clazz) {
-        return platformClassInfoService.getFieldsWithoutDefaultValue(clazz);
+    public List<PlatformClassField> getFields(String clazz) {
+        return platformClassInfoService.getFields(clazz);
     }
 
     @Override
