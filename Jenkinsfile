@@ -42,9 +42,9 @@ pipeline {
         }
     }
 
-    tools {
-        jdk 'openjdk-11.0.11_linux'
-    }
+//     tools {
+//         jdk 'openjdk-11.0.11_linux'
+//     }
 
 
     stages {
