@@ -165,23 +165,8 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
-    public List<PlatformClassField> getStaticFields(List<String> classes) {
-        return platformClassInfoService.getStaticFields(classes);
-    }
-
-    @Override
-    public void createOrReplaceObjStatics(List<PlatformClass> platformClasses) {
-        platformClassInfoService.createOrReplaceObjStatics(platformClasses);
-    }
-
-    @Override
     public void fillDefaultValuesForDataTables(List<PlatformClassField> fields) {
         platformClassInfoService.fillDefaultValuesForDataTables(fields);
-    }
-
-    @Override
-    public Map<String, Object> getFieldMap(String clazz, String id) {
-        return platformClassInfoService.getFieldMap(clazz, id);
     }
 
     @Override
