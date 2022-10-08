@@ -13,6 +13,8 @@ public abstract class PlatformConnection {
     private String url;
     private String dataSourceClassName;
     private String connectionInitSql;
+    private String moduleName;
+    private String initId;
 
     @Override
     public String toString() {
