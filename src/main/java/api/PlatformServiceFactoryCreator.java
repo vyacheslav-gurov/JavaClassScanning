@@ -30,7 +30,7 @@ public class PlatformServiceFactoryCreator {
             initSql = connection.getConnectionInitSql();
         }
         config.setConnectionInitSql(initSql);
-        config.setConnectionTimeout(600000);
+        config.setConnectionTimeout(0);
         config.setMaxLifetime(1800000);
         config.setMinimumIdle(20);
         config.setValidationTimeout(3000);
