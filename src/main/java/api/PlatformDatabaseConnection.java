@@ -39,7 +39,9 @@ public class PlatformDatabaseConnection extends PlatformConnection {
         props.setProperty("platformDatabaseConnection.schema", this.getSchema() == null ? "" : this.getSchema());
         props.setProperty("platformDatabaseConnection.moduleName", this.getModuleName() == null ? "" : this.getModuleName());
         props.setProperty("platformDatabaseConnection.initId", this.getInitId() == null ? "" : this.getInitId());
-        props.setProperty("platformDatabaseConnection.overrideConnectionInitSql", this.getConnectionInitSql() == null ? "" : this.getConnectionInitSql());
+        if (this.getConnectionInitSql() != null) {
+            props.setProperty("platformDatabaseConnection.overrideConnectionInitSql", this.getConnectionInitSql());
+        }
         return props;
     }
 }
