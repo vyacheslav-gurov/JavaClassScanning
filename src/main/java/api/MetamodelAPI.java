@@ -48,8 +48,8 @@ public class MetamodelAPI {
         }
     }
 
-    public PlatformServiceFactoryCreator getDatabasePlatformServiceFactoryCreator() {
-        return new PlatformServiceFactoryCreator(classLoader);
+    public PlatformServiceFactoryCreator getDatabasePlatformServiceFactoryCreator(PlatformDatabaseConnection connection) {
+        return new PlatformServiceFactoryCreator(classLoader, connection);
     }
 
     public FsPlatformServiceFactory getFileSystemPlatformServiceFactory() {

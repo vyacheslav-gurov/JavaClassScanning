@@ -14,6 +14,8 @@ import java.util.Properties;
 public class PlatformDatabaseConnection extends PlatformConnection {
     private String username;
     private String pass;
+    private Integer maxConnections;
+    private String schema;
 
     @Override
     public String toString() {
