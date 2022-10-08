@@ -16,6 +16,9 @@ public class PlatformDatabaseConnection extends PlatformConnection {
     private String pass;
     private Integer maxConnections;
     private String schema;
+    private String connectionInitSql;
+    private String moduleName;
+    private String initId;
 
     @Override
     public String toString() {
@@ -32,6 +35,11 @@ public class PlatformDatabaseConnection extends PlatformConnection {
         props.setProperty("dataSource.url", this.getUrl());
         props.setProperty("dataSource.user", this.getUsername());
         props.setProperty("dataSource.password", this.getPass());
+        props.setProperty("platformDatabaseConnection.maxConnections", this.getMaxConnections() == null ? "" : this.getMaxConnections().toString());
+        props.setProperty("platformDatabaseConnection.schema", this.getSchema());
+        props.setProperty("platformDatabaseConnection.moduleName", this.getModuleName());
+        props.setProperty("platformDatabaseConnection.initId", this.getInitId());
+        props.setProperty("platformDatabaseConnection.overrideConnectionInitSql", this.getConnectionInitSql());
         return props;
     }
 }
