@@ -23,8 +23,7 @@ class MetamodelVersionService {
         }
         String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
 
-        String fullVersion = Arrays.stream(directories != null ? directories : new String[0]).findFirst().orElse(DEFAULT);
-        return getMajorVersionName(fullVersion);
+        return Arrays.stream(directories != null ? directories : new String[0]).findFirst().orElse(DEFAULT);
     }
 
     protected static URL getVersionFolded(ClassLoader classLoader, String version) {
@@ -67,17 +66,5 @@ class MetamodelVersionService {
                 .filter(f -> !f.equals(searchFolder + "/"))
                 .map(m -> m.replace(searchFolder, "").replace("/", ""))
                 .distinct().collect(Collectors.toList());
-    }
-
-    private static String getMajorVersionName(String version) {
-        if (version.contains(SNAPSHOT)) {
-            return SNAPSHOT;
-        }
-        String[] split = version.split("\\.");
-        if (split.length < 2) {
-            return split[0];
-        }
-        return split[0] + split[1];
-
     }
 }
