@@ -12,7 +12,7 @@ import java.util.zip.ZipInputStream;
 
 class MetamodelVersionService {
 
-    private final static String DEFAULT = "2022.3";
+    private final static String DEFAULT = "20223";
     private final static String SNAPSHOT = "SNAPSHOT";
     private final static String VERSION_FOLDER = "metamodel-impl";
 
