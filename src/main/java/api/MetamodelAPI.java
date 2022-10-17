@@ -3,9 +3,6 @@ package api;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
-
 import static api.MetamodelVersionService.getCurrentVersion;
 import static api.MetamodelVersionService.getLastVersion;
 
@@ -54,9 +51,5 @@ public class MetamodelAPI {
 
     public FsPlatformServiceFactory getFileSystemPlatformServiceFactory() {
         return new FsPlatformServiceFactory(rootPath, classLoader);
-    }
-
-    public PlatformDatabaseSessionConnection getPlatformDatabaseSessionConnection(DataSource dataSource, String schema) throws SQLException {
-        return new PlatformDatabaseSessionConnection(dataSource, schema, classLoader);
     }
 }
