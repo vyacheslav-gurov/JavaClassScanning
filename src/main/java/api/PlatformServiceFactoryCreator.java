@@ -33,8 +33,8 @@ public class PlatformServiceFactoryCreator {
         config.setConnectionTimeout(0);
         config.setMaxLifetime(1800000);
         config.setMinimumIdle(20);
-        config.setValidationTimeout(3000);
-        config.setIdleTimeout(60000);
+        config.setValidationTimeout(300000);
+        config.setIdleTimeout(1800000);
         config.addDataSourceProperty("v$session.program", String.format(connection.getModuleName(), connection.getInitId()));
         config.setJdbcUrl(connection.getUrl());
         this.dataSource = new HikariDataSource(config);
