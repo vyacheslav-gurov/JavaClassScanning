@@ -119,22 +119,6 @@ pipeline {
             }
         }
 
-        stage(' Publish Sigma') {
-            when {
-                expression { REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) }
-            }
-            steps {
-                withCredentials([usernamePassword(credentialsId: "${TUZ_PUBLISH_TO_SIGMA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
-                    script {
-                        ansiColor('xterm') {
-                            echo "\033[32m############################## Публикация проекта под ТУЗ = ${TUZ_PUBLISH_TO_SIGMA}\033[0m"
-                        }
-                        sh './gradlew publishAllPublicationsToSigmaRepository -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
-                    }
-                }
-            }
-        }
-
         stage(' Publish Delta') {
             when {
                 expression { REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) }
