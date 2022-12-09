@@ -15,64 +15,23 @@ java {
 repositories {
     mavenLocal()
     maven {
-        url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/gradle_plugins_proxy/'
+        url "https://nexus-ci.delta.sbrf.ru/repository/public/"
         credentials {
-            username "$ciUsername"
-            password "$ciPassword"
+            username "${ciUsername}@delta.sbrf.ru"
+            password ciPassword
         }
+        allowInsecureProtocol = true
     }
     maven {
-        url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-releases/'
+        url "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/"
         credentials {
-            username "$ciUsername"
-            password "$ciPassword"
+            username "${ciUsername}@delta.sbrf.ru"
+            password ciPassword
         }
-    }
-    maven {
-        url 'https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-snapshots/'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
-    }
-    maven {
-        url 'https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-releases/'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
-    }
-    maven {
-        url 'https://nexus.sigma.sbrf.ru/nexus/content/groups/internal'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
-    }
-    maven {
-        url 'https://sbtnexus.delta.sbrf.ru/nexus/content/groups/internal'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
-    }
-    maven {
-        url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/maven.oracle_proxy/'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
-    }
-    maven {
-        url 'https://nexus.sigma.sbrf.ru/nexus/content/repositories/central/'
-        credentials {
-            username "$ciUsername"
-            password "$ciPassword"
-        }
+        allowInsecureProtocol = true
     }
     mavenCentral()
 }
-
 
 dependencies {
 
@@ -95,25 +54,13 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name "Sigma"
+            name "maven"
             afterEvaluate {
                 url version.endsWith('SNAPSHOT') ?
-                        "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-snapshots" :
-                        "https://nexus.sigma.sbrf.ru/nexus/content/repositories/corp-releases"
+                        "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-dev/" :
+                        "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-release/"
                 credentials {
-                    username ciUsername
-                    password ciPassword
-                }
-            }
-        }
-        maven {
-            name "Delta"
-            afterEvaluate {
-                url version.endsWith('SNAPSHOT') ?
-                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-snapshots" :
-                        "https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-releases"
-                credentials {
-                    username ciUsername
+                    username "${ciUsername}@delta.sbrf.ru"
                     password ciPassword
                 }
             }
