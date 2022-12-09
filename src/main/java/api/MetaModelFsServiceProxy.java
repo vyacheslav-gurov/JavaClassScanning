@@ -14,7 +14,8 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         PlatformCriterionComplexService,
         PlatformCriterionInfoService,
         PlatformIndexColumnService,
-        PlatformMethodInfoService {
+        PlatformMethodInfoService,
+        PlatformClassKeysService {
 
     private final PlatformClassInfoService platformClassInfoService;
     private final PlatformClassService platformClassService;
@@ -24,6 +25,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     private final PlatformCriterionInfoService platformCriterionInfoService;
     private final PlatformIndexColumnService platformIndexColumnService;
     private final PlatformMethodInfoService platformMethodInfoService;
+    private final PlatformClassKeysService platformClassKeysService;
 
     protected MetaModelFsServiceProxy(String rootPath,
                                       PlatformClassService platformClassService, ClassLoader classLoader) {
@@ -37,6 +39,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         this.platformCriterionInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformCriterionInfoService, typeParams);
         this.platformIndexColumnService = getServiceInstanceFromNameAndTypeParams(FsPlatformIndexColumnService, typeParams);
         this.platformMethodInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformMethodInfoService, typeParams);
+        this.platformClassKeysService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassKeyService, typeParams);
     }
 
     @Override
@@ -577,5 +580,35 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     @Override
     public void removeComplexColumn(PlatformClassCriterionComplexColumn complexColumn) {
         platformCriterionComplexService.removeComplexColumn(complexColumn);
+    }
+
+    @Override
+    public Iterable<PlatformClassKey> getKeys(String clazz) {
+        return platformClassKeysService.getKeys(clazz);
+    }
+
+    @Override
+    public Iterable<PlatformClassKeyField> getKeyFields(String clazz, String key) {
+        return platformClassKeysService.getKeyFields(clazz, key);
+    }
+
+    @Override
+    public void createOrReplaceKey(PlatformClassKey key) {
+        platformClassKeysService.createOrReplaceKey(key);
+    }
+
+    @Override
+    public void removeKey(PlatformClassKey key) {
+        platformClassKeysService.removeKey(key);
+    }
+
+    @Override
+    public void createOrReplaceKeyField(PlatformClassKeyField keyField) {
+        platformClassKeysService.createOrReplaceKeyField(keyField);
+    }
+
+    @Override
+    public void removeKeyField(PlatformClassKeyField keyField) {
+        platformClassKeysService.removeKeyField(keyField);
     }
 }
