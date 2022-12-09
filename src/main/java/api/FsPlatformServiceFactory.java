@@ -102,6 +102,11 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformClassKeysService createPlatformClassKeysService() {
+        return new MetaModelFsServiceProxy(rootPath, createPlatformClassService(), classLoader);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         return getServiceInstanceFromNameAndParams(ModelFilePathService, invokeClassMethod(getServiceInstanceFromNameAndParams(ModelFileServiceFactory), "getService", rootPath));
     }

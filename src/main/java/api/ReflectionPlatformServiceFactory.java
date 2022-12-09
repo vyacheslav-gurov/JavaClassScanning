@@ -19,6 +19,7 @@ public abstract class ReflectionPlatformServiceFactory {
     protected final static String DbPlatformMethodInfoService = "ru.sber.cb.diam.metamodel.impl.db.DbPlatformMethodInfoService";
     protected final static String DbPlatformIndexColumnService = "ru.sber.cb.diam.metamodel.impl.db.DbPlatformIndexColumnService";
     protected final static String DbPlatformClassTableService = "ru.sber.cb.diam.metamodel.impl.db.DbPlatformClassTableService";
+    protected final static String DbPlatformClassKeyService = "ru.sber.cb.diam.metamodel.impl.db.DbPlatformClassKeyService";
     protected final static String ModelFilePathService = "ru.sber.cb.diam.metamodel.impl.fs.services.ModelFilePathService";
     protected final static String ModelFileServiceFactory = "ru.sber.cb.diam.metamodel.impl.fs.services.ModelFileServiceFactory";
     protected final static String FsPlatformClassInfoService = "ru.sber.cb.diam.metamodel.impl.fs.FsPlatformClassInfoService";
@@ -29,7 +30,7 @@ public abstract class ReflectionPlatformServiceFactory {
     protected final static String FsPlatformCriterionInfoService = "ru.sber.cb.diam.metamodel.impl.fs.FsPlatformCriterionInfoService";
     protected final static String FsPlatformIndexColumnService = "ru.sber.cb.diam.metamodel.impl.fs.FsPlatformIndexColumnService";
     protected final static String FsPlatformMethodInfoService = "ru.sber.cb.diam.metamodel.impl.fs.FsPlatformMethodInfoService";
-    protected final static String PlatformSessionService = "ru.sber.cb.diam.metamodel.impl.db.PlatformSessionService";
+    protected final static String FsPlatformClassKeyService = "ru.sber.cb.diam.metamodel.impl.fs.FsPlatformClassKeyService";
 
     protected final ClassLoader classLoader;
 
