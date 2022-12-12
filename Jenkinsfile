@@ -1,33 +1,7 @@
 
-/// SIGMA
-TUZ_SIGMA='CAB-SA-CI000602'
-TUZ_SIGMA_SSH='CAB-SA-CI000602_ssh'
-TAGGER_JOB_NAME_SIGMA="CBP/ekp/cb/update_tag_on_commit_all_branch"
-TUZ_SIGMA_PUBLISH_DELTA='CAB-SA-DVO00220'
-
-/// DELTA
-TUZ_DELTA='75c4d197-c4a6-42b9-b738-97a2a575d5d0'
-TUZ_DELTA_SSH='047d7d69-78f3-474f-9595-eb4681b24a7d'
-TAGGER_JOB_NAME_DELTA="PRCRED/EKP-FP/update_tag_on_commit_all_branch"
-TUZ_DELTA_PUBLISH_SIGMA='CAB-SA-CI000602'
-
-
-if (JENKINS_URL.contains('.delta.')) {
-    println('Домен определен, как DELTA')
-    TUZ_BUILD=TUZ_DELTA
-    TUZ_PUBLISH_TO_SIGMA=TUZ_DELTA_PUBLISH_SIGMA
-    TUZ_PUBLISH_TO_DELTA=TUZ_DELTA
-    TUZ_SSH=TUZ_DELTA_SSH
-    TAGGER_JOB_NAME=TAGGER_JOB_NAME_DELTA
-} else {
-    println('Домен определен, как SIGMA')
-    TUZ_BUILD=TUZ_SIGMA
-    TUZ_PUBLISH_TO_SIGMA=TUZ_SIGMA
-    TUZ_PUBLISH_TO_DELTA=TUZ_SIGMA_PUBLISH_DELTA
-    TUZ_SSH=TUZ_SIGMA_SSH
-    TAGGER_JOB_NAME=TAGGER_JOB_NAME_SIGMA
-}
-
+TUZ_BUILD='75c4d197-c4a6-42b9-b738-97a2a575d5d0'
+TUZ_SSH='047d7d69-78f3-474f-9595-eb4681b24a7d'
+TAGGER_JOB_NAME="PRCRED/EKP-FP/update_tag_on_commit_all_branch"
 
 pipeline {
     options {
@@ -35,20 +9,14 @@ pipeline {
         buildDiscarder(logRotator(artifactDaysToKeepStr: '30', artifactNumToKeepStr: '50',  daysToKeepStr: '30', numToKeepStr: '50'))
     }
 
-
     agent {
         node {
-            label 'masterLin'
+            label 'clearAgent'
         }
     }
 
-//     tools {
-//         jdk 'openjdk-11.0.11_linux'
-//     }
-
-
     stages {
-        stage(' Check TAGs ') {
+        stage('Check TAGs') {
             steps {
                 script {
                     echo "params.autotest: ${params.autotest}"
@@ -79,12 +47,11 @@ pipeline {
                             string(name: 'COMMIT_REPO_URL', value: env.GIT_URL)
                         ]
 
-
                     sshagent(["${TUZ_SSH}"]) {
                         script {
                             sh """
-                                git tag | xargs git tag -d
-                                git pull --tags
+                                git tag | xargs git tag -d > /dev/null 2>&1
+                                git fetch --tags
                             """
                         }
                     }
@@ -92,7 +59,7 @@ pipeline {
             }
         }
 
-        stage(' Set build name ') {
+        stage('Set build name') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                     script {
@@ -104,13 +71,14 @@ pipeline {
             }
         }
 
-        stage(' Build ') {
+        stage('Build') {
             steps {
                     withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                         script {
                             if ( REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) ) {
                                 echo "BUILD NOW"
-                                sh './gradlew clean build -PciUsername=$ciUsername -PciPassword=$ciPassword --refresh-dependencies'
+                                sh 'rm -rfd --one-file-system $HOME/.gradle/caches/'
+                                sh './gradlew clean build -PciUsername=$ciUsername -PciPassword=$ciPassword'
                             } else {
                                 echo "DO NOT BUILD THIS TIME"
                             }
@@ -119,17 +87,17 @@ pipeline {
             }
         }
 
-        stage(' Publish Delta') {
+        stage('Publish') {
             when {
                 expression { REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) }
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: "${TUZ_PUBLISH_TO_DELTA}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
+                withCredentials([usernamePassword(credentialsId: "${TUZ_BUILD}", passwordVariable: 'ciPassword', usernameVariable: 'ciUsername')]) {
                     script {
                         ansiColor('xterm') {
-                            echo "\033[32m############################## Публикация проекта под ТУЗ = ${TUZ_PUBLISH_TO_DELTA}\033[0m"
+                            echo "\033[32m############################## Публикация проекта под ТУЗ = ${TUZ_BUILD}\033[0m"
                         }
-                        sh './gradlew publishAllPublicationsToDeltaRepository -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
+                        sh './gradlew publish -PciUsername=$ciUsername -PciPassword=$ciPassword --info'
                     }
                 }
             }
