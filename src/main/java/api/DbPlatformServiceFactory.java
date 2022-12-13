@@ -113,6 +113,11 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformClassKeysService createPlatformClassKeysService() {
+        return getServiceInstanceFromNameAndParams(DbPlatformClassKeyService, queryRunner, schema);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         throw new UnsupportedOperationException();
     }
