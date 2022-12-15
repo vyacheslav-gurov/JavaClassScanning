@@ -203,13 +203,13 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
-    public void compilePlatformClass(String className, boolean compile) {
-        platformClassService.compilePlatformClass(className, compile);
+    public void compilePlatformClass(String className) {
+        platformClassService.compilePlatformClass(className);
     }
 
     @Override
-    public void compilePlatformClass(List<String> classNames, boolean compile) {
-        platformClassService.compilePlatformClass(classNames, compile);
+    public void compilePlatformClass(List<String> classNames) {
+        platformClassService.compilePlatformClass(classNames);
     }
 
     @Override
