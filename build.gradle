@@ -35,7 +35,11 @@ repositories {
 
 dependencies {
 
+<<<<<<<<< Temporary merge branch 1
+    api 'ru.sber.cb.diam:metamodel-services:2022.3.17-CBNII-408-SNAPSHOT'
+=========
     api 'ru.sber.cb.diam:metamodel-services:2022.4.1.2'
+>>>>>>>>> Temporary merge branch 2
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
