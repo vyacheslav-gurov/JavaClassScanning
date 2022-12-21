@@ -113,6 +113,16 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformEntityService createPlatformEntityService() {
+        return getServiceInstanceFromNameAndParams(DbPlatformEntityService, queryRunner, schema);
+    }
+
+    @Override
+    public PlatformEntityService createPlatformEntityService(PlatformClassService platformClassService) {
+        return createPlatformEntityService();
+    }
+
+    @Override
     public PlatformClassKeysService createPlatformClassKeysService() {
         return getServiceInstanceFromNameAndParams(DbPlatformClassKeyService, queryRunner, schema);
     }

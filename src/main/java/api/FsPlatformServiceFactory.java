@@ -102,6 +102,16 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformEntityService createPlatformEntityService() {
+        return new MetaModelFsServiceProxy(rootPath, null, classLoader);
+    }
+
+    @Override
+    public PlatformEntityService createPlatformEntityService(PlatformClassService platformClassService) {
+        return new MetaModelFsServiceProxy(rootPath, platformClassService, classLoader);
+    }
+
+    @Override
     public PlatformClassKeysService createPlatformClassKeysService() {
         return new MetaModelFsServiceProxy(rootPath, createPlatformClassService(), classLoader);
     }

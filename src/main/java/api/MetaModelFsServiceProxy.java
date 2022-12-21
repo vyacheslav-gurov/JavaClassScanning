@@ -15,7 +15,8 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         PlatformCriterionInfoService,
         PlatformIndexColumnService,
         PlatformMethodInfoService,
-        PlatformClassKeysService {
+        PlatformClassKeysService,
+        PlatformEntityService {
 
     private final PlatformClassInfoService platformClassInfoService;
     private final PlatformClassService platformClassService;
@@ -26,6 +27,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     private final PlatformIndexColumnService platformIndexColumnService;
     private final PlatformMethodInfoService platformMethodInfoService;
     private final PlatformClassKeysService platformClassKeysService;
+    private final PlatformEntityService platformEntityService;
 
     protected MetaModelFsServiceProxy(String rootPath,
                                       PlatformClassService platformClassService, ClassLoader classLoader) {
@@ -40,6 +42,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         this.platformIndexColumnService = getServiceInstanceFromNameAndTypeParams(FsPlatformIndexColumnService, typeParams);
         this.platformMethodInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformMethodInfoService, typeParams);
         this.platformClassKeysService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassKeyService, typeParams);
+        this.platformEntityService = getServiceInstanceFromNameAndParams(FsPlatformEntityService, typeParams);
     }
 
     @Override
@@ -610,5 +613,20 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     @Override
     public void removeKeyField(PlatformClassKeyField keyField) {
         platformClassKeysService.removeKeyField(keyField);
+    }
+
+    @Override
+    public Iterable<PlatformEntity> getPlatformEntities() {
+        return platformEntityService.getPlatformEntities();
+    }
+
+    @Override
+    public PlatformEntity getPlatformEntity(String id) {
+        return platformEntityService.getPlatformEntity(id);
+    }
+
+    @Override
+    public Map<String, Object> getEntityMap(String id) {
+        return platformEntityService.getEntityMap(id);
     }
 }
