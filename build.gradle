@@ -17,7 +17,7 @@ repositories {
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/public/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
+            username ciUsername
             password ciPassword
         }
         allowInsecureProtocol = true
@@ -25,7 +25,7 @@ repositories {
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
+            username ciUsername
             password ciPassword
         }
         allowInsecureProtocol = true
@@ -60,7 +60,7 @@ publishing {
                         "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-dev/" :
                         "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-release/"
                 credentials {
-                    username "${ciUsername}@delta.sbrf.ru"
+                    username ciUsername
                     password ciPassword
                 }
             }

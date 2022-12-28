@@ -42,7 +42,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         this.platformIndexColumnService = getServiceInstanceFromNameAndTypeParams(FsPlatformIndexColumnService, typeParams);
         this.platformMethodInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformMethodInfoService, typeParams);
         this.platformClassKeysService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassKeyService, typeParams);
-        this.platformEntityService = getServiceInstanceFromNameAndParams(FsPlatformEntityService, typeParams);
+        this.platformEntityService = getServiceInstanceFromNameAndTypeParams(FsPlatformEntityService, typeParams);
     }
 
     @Override
