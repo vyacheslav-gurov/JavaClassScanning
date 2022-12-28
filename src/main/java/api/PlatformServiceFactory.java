@@ -25,6 +25,9 @@ public interface PlatformServiceFactory {
     PlatformClassTableService createPlatformClassTableService();
     PlatformClassTableService createPlatformClassTableService(PlatformClassService platformClassService);
 
+    PlatformEntityService createPlatformEntityService();
+    PlatformEntityService createPlatformEntityService(PlatformClassService platformClassService);
+
     PlatformClassKeysService createPlatformClassKeysService();
 
     FsModelPathService createFsModelPathService();
