@@ -1,5 +1,5 @@
 
-TUZ_BUILD='75c4d197-c4a6-42b9-b738-97a2a575d5d0'
+TUZ_BUILD='0cabf632-0cb7-41cc-9dda-4a1b4a903f48'
 TUZ_SSH='047d7d69-78f3-474f-9595-eb4681b24a7d'
 TAGGER_JOB_NAME="PRCRED/EKP-FP/update_tag_on_commit_all_branch"
 
