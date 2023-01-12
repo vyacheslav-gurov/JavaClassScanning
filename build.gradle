@@ -36,7 +36,7 @@ repositories {
 dependencies {
 
 
-    api 'ru.sber.cb.diam:metamodel-services:2022.4.3-CBNII-496-get-kernel-SNAPSHOT'
+    api 'ru.sber.cb.diam:metamodel-services:2022.4.3-SNAPSHOT'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
