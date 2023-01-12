@@ -77,7 +77,6 @@ pipeline {
                         script {
                             if ( REAL_BRANCH.contains('release/') || REAL_BRANCH.contains('develop') || ( env.BRANCH_NAME.matches('PR-[0-9]+') && ( REAL_BRANCH.contains('feature/') || REAL_BRANCH.contains('bugfix/') ) ) ) {
                                 echo "BUILD NOW"
-                                sh 'rm -rfd --one-file-system $HOME/.gradle/caches/'
                                 sh './gradlew clean build -PciUsername=$ciUsername -PciPassword=$ciPassword'
                             } else {
                                 echo "DO NOT BUILD THIS TIME"
