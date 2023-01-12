@@ -56,6 +56,11 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
+    public Iterable<PlatformClassMethod> getKernel() {
+        return platformClassInfoService.getKernel();
+    }
+
+    @Override
     public Iterable<PlatformClassCriterion> getCriteria(String clazz) {
         return platformClassInfoService.getCriteria(clazz);
     }
