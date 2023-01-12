@@ -17,16 +17,16 @@ repositories {
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/public/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
-            password ciPassword
+            username "${ciUsername}"
+            password "${ciPassword}"
         }
         allowInsecureProtocol = true
     }
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
-            password ciPassword
+            username "${ciUsername}"
+            password "${ciPassword}"
         }
         allowInsecureProtocol = true
     }
