@@ -129,6 +129,11 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
 
     @Override
     public FsModelPathService createFsModelPathService() {
+        return createFsModelPathService(false);
+    }
+
+    @Override
+    public FsModelPathService createFsModelPathService(boolean createSchemaVersion) {
         throw new UnsupportedOperationException();
     }
 
