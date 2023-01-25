@@ -118,7 +118,12 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
 
     @Override
     public FsModelPathService createFsModelPathService() {
-        return getServiceInstanceFromNameAndParams(ModelFilePathService, invokeClassMethod(getServiceInstanceFromNameAndParams(ModelFileServiceFactory), "getService", rootPath));
+        return createFsModelPathService(false);
+    }
+
+    @Override
+    public FsModelPathService createFsModelPathService(boolean createSchemaVersion) {
+        return getServiceInstanceFromNameAndParams(ModelFilePathService, invokeClassMethod(getServiceInstanceFromNameAndParams(ModelFileServiceFactory), "getService", rootPath), createSchemaVersion);
     }
 
     @Override
