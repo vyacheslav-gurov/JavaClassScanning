@@ -35,7 +35,7 @@ repositories {
 
 dependencies {
 
-    api 'ru.sber.cb.diam:metamodel-services:2022.4.5-SNAPSHOT'
+    api 'ru.sber.cb.diam:metamodel-services:2023.1.1.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
