@@ -11,7 +11,7 @@ pipeline {
 
     agent {
         node {
-            label 'clearAgent'
+            label 'clearAgent&&static'
         }
     }
 

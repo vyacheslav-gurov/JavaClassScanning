@@ -21,14 +21,21 @@ public interface PlatformServiceFactory {
     PlatformClassTriggerInfoService createPlatformClassTrigger();
     PlatformClassTriggerInfoService createPlatformClassTrigger(PlatformClassService platformClassService);
     PlatformIndexColumnService createPlatformIndexColumnService();
+
     PlatformIndexColumnService createPlatformIndexColumnService(PlatformClassService platformClassService);
+
     PlatformClassTableService createPlatformClassTableService();
+
     PlatformClassTableService createPlatformClassTableService(PlatformClassService platformClassService);
 
     PlatformEntityService createPlatformEntityService();
+
     PlatformEntityService createPlatformEntityService(PlatformClassService platformClassService);
 
     PlatformClassKeysService createPlatformClassKeysService();
 
     FsModelPathService createFsModelPathService();
+
+    FsModelPathService createFsModelPathService(boolean createSchemaVersion);
+
 }
