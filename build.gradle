@@ -17,16 +17,16 @@ repositories {
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/public/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
-            password ciPassword
+            username "${ciUsername}"
+            password "${ciPassword}"
         }
         allowInsecureProtocol = true
     }
     maven {
         url "https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/"
         credentials {
-            username "${ciUsername}@delta.sbrf.ru"
-            password ciPassword
+            username "${ciUsername}"
+            password "${ciPassword}"
         }
         allowInsecureProtocol = true
     }
@@ -35,7 +35,7 @@ repositories {
 
 dependencies {
 
-    api 'ru.sber.cb.diam:metamodel-services:2023.1.1.1'
+    api 'ru.sber.cb.diam:metamodel-services:2023.1.2.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
