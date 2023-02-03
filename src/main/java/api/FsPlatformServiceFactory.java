@@ -117,6 +117,11 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformGuideGroupService createPlatformGuideGroupService() {
+        return new MetaModelFsServiceProxy(rootPath, createPlatformClassService(), classLoader);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         return createFsModelPathService(false);
     }
