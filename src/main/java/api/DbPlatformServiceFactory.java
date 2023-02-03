@@ -128,6 +128,11 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformGuideGroupService createPlatformGuideGroupService() {
+        return getServiceInstanceFromNameAndParams(DbPlatformGuideGroupService, queryRunner, schema);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         return createFsModelPathService(false);
     }
