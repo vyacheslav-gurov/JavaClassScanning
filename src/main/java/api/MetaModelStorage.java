@@ -1,10 +1,11 @@
 package api;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import ru.sber.cb.diam.metamodel.services.*;
 
-@Builder
+@Builder(access = AccessLevel.PACKAGE)
 @Getter
 public class MetaModelStorage {
     private PlatformServiceFactory platformServiceFactory;
