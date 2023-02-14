@@ -40,4 +40,6 @@ public interface PlatformServiceFactory {
 
     FsModelPathService createFsModelPathService(boolean createSchemaVersion);
 
+    MetaModelStorage createMetaModelStorage();
+
 }

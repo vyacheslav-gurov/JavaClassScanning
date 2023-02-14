@@ -143,6 +143,23 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public MetaModelStorage createMetaModelStorage() {
+        return MetaModelStorage
+                .builder()
+                .platformServiceFactory(this)
+                .platformClassService(this.createPlatformClassService())
+                .platformClassTableService(this.createPlatformClassTableService())
+                .platformClassInfoService(this.createPlatformClassInfoService())
+                .platformMethodInfoService(this.createPlatformMethodInfoService())
+                .platformCriterionInfoService(this.createPlatformCriterionInfoService())
+                .platformCriterionComplexService(this.createPlatformCriterionComplexService())
+                .platformClassTriggerInfoService(null)
+                .platformIndexColumnService(this.createPlatformIndexColumnService())
+                .platformClassKeysService(this.createPlatformClassKeysService())
+                .build();
+    }
+
+    @Override
     public void close() throws IOException {
         if (Closeable.class.isAssignableFrom(dataSource.getClass())) {
             Closeable closeable = (Closeable) dataSource;
