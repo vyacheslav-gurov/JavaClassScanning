@@ -128,6 +128,11 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformGuideGroupService createPlatformGuideGroupService() {
+        return getServiceInstanceFromNameAndParams(DbPlatformGuideGroupService, queryRunner, schema);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         return createFsModelPathService(false);
     }
@@ -135,6 +140,23 @@ public class DbPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     @Override
     public FsModelPathService createFsModelPathService(boolean createSchemaVersion) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public MetaModelStorage createMetaModelStorage() {
+        return MetaModelStorage
+                .builder()
+                .platformServiceFactory(this)
+                .platformClassService(this.createPlatformClassService())
+                .platformClassTableService(this.createPlatformClassTableService())
+                .platformClassInfoService(this.createPlatformClassInfoService())
+                .platformMethodInfoService(this.createPlatformMethodInfoService())
+                .platformCriterionInfoService(this.createPlatformCriterionInfoService())
+                .platformCriterionComplexService(this.createPlatformCriterionComplexService())
+                .platformClassTriggerInfoService(null)
+                .platformIndexColumnService(this.createPlatformIndexColumnService())
+                .platformClassKeysService(this.createPlatformClassKeysService())
+                .build();
     }
 
     @Override

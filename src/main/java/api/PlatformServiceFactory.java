@@ -34,8 +34,12 @@ public interface PlatformServiceFactory {
 
     PlatformClassKeysService createPlatformClassKeysService();
 
+    PlatformGuideGroupService createPlatformGuideGroupService();
+
     FsModelPathService createFsModelPathService();
 
     FsModelPathService createFsModelPathService(boolean createSchemaVersion);
+
+    MetaModelStorage createMetaModelStorage();
 
 }

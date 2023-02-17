@@ -48,7 +48,7 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
 
     @Override
     public PlatformCriterionInfoService createPlatformCriterionInfoService() {
-        throw new UnsupportedOperationException();
+        return new MetaModelFsServiceProxy(rootPath, null, classLoader);
     }
 
     @Override
@@ -117,6 +117,11 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     }
 
     @Override
+    public PlatformGuideGroupService createPlatformGuideGroupService() {
+        return new MetaModelFsServiceProxy(rootPath, createPlatformClassService(), classLoader);
+    }
+
+    @Override
     public FsModelPathService createFsModelPathService() {
         return createFsModelPathService(false);
     }
@@ -124,6 +129,23 @@ public class FsPlatformServiceFactory extends ReflectionPlatformServiceFactory i
     @Override
     public FsModelPathService createFsModelPathService(boolean createSchemaVersion) {
         return getServiceInstanceFromNameAndParams(ModelFilePathService, invokeClassMethod(getServiceInstanceFromNameAndParams(ModelFileServiceFactory), "getService", rootPath), createSchemaVersion);
+    }
+
+    @Override
+    public MetaModelStorage createMetaModelStorage() {
+        return MetaModelStorage
+                .builder()
+                .platformServiceFactory(this)
+                .platformClassService(this.createPlatformClassService())
+                .platformClassTableService(this.createPlatformClassTableService())
+                .platformClassInfoService(this.createPlatformClassInfoService())
+                .platformMethodInfoService(this.createPlatformMethodInfoService())
+                .platformCriterionInfoService(this.createPlatformCriterionInfoService())
+                .platformCriterionComplexService(this.createPlatformCriterionComplexService())
+                .platformClassTriggerInfoService(this.createPlatformClassTrigger())
+                .platformIndexColumnService(this.createPlatformIndexColumnService())
+                .platformClassKeysService(this.createPlatformClassKeysService())
+                .build();
     }
 
     @Override

@@ -16,6 +16,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         PlatformIndexColumnService,
         PlatformMethodInfoService,
         PlatformClassKeysService,
+        PlatformGuideGroupService,
         PlatformEntityService {
 
     private final PlatformClassInfoService platformClassInfoService;
@@ -27,6 +28,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     private final PlatformIndexColumnService platformIndexColumnService;
     private final PlatformMethodInfoService platformMethodInfoService;
     private final PlatformClassKeysService platformClassKeysService;
+    private final PlatformGuideGroupService platformGuideGroupService;
     private final PlatformEntityService platformEntityService;
 
     protected MetaModelFsServiceProxy(String rootPath,
@@ -42,6 +44,7 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
         this.platformIndexColumnService = getServiceInstanceFromNameAndTypeParams(FsPlatformIndexColumnService, typeParams);
         this.platformMethodInfoService = getServiceInstanceFromNameAndTypeParams(FsPlatformMethodInfoService, typeParams);
         this.platformClassKeysService = getServiceInstanceFromNameAndTypeParams(FsPlatformClassKeyService, typeParams);
+        this.platformGuideGroupService = getServiceInstanceFromNameAndTypeParams(FsPlatformGuideGroupService, typeParams);
         this.platformEntityService = getServiceInstanceFromNameAndTypeParams(FsPlatformEntityService, typeParams);
     }
 
@@ -628,5 +631,20 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     @Override
     public Map<String, Object> getEntityMap(String id) {
         return platformEntityService.getEntityMap(id);
+    }
+
+    @Override
+    public Iterable<PlatformGuideGroup> getAllPlatformGuideGroups() {
+        return platformGuideGroupService.getAllPlatformGuideGroups();
+    }
+
+    @Override
+    public void createOrReplacePlatformGuideGroup(PlatformGuideGroup platformGuideGroup) {
+        platformGuideGroupService.createOrReplacePlatformGuideGroup(platformGuideGroup);
+    }
+
+    @Override
+    public void removePlatformGuideGroup(String platformGuideGroupId) {
+        platformGuideGroupService.removePlatformGuideGroup(platformGuideGroupId);
     }
 }
