@@ -209,6 +209,11 @@ class MetaModelFsServiceProxy extends ReflectionPlatformServiceFactory implement
     }
 
     @Override
+    public void removePlatformClass(String className) {
+        platformClassService.removePlatformClass(className);
+    }
+
+    @Override
     public void compilePlatformClass(String className) {
         platformClassService.compilePlatformClass(className);
     }
